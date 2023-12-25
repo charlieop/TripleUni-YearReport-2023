@@ -8,6 +8,7 @@
 
 /* Global Font Sizes */
 :root {
+  --fs-100: 0.625rem;
   --fs-200: 0.75rem;
   --fs-300: 1.25em;
   --fs-400: 1.5rem;

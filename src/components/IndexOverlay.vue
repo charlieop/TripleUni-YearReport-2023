@@ -1,18 +1,47 @@
 <template>
   <div class="wrapper" v-if="!hidePage">
     <div class="container">
-      <h1>
-        <p>TripleUni 2023</p>
-        <p>年度总结</p>
-      </h1>
-      <div class="button" @click="moveUp">查收我的报告</div>
+      <div class="img-container">
+        <img src="@/assets/imgs/title.svg" alt="" />
+        <img src="@/assets/imgs/pointer.svg" class="pointer" alt="" />
+      </div>
+      <div class="img-container">
+        <img :src="subtitles[subtitleIndex % 3]" alt="" />
+        <img src="@/assets/imgs/arrow.svg" class="arrow" alt="" />
+        <img src="@/assets/imgs/right.svg" class="right" alt="" />
+      </div>
+      <div class="btn-container">
+        <div class="button" @click="moveUp">查收我的报告</div>
+        <div class="button button-1" @click="moveUp"></div>
+        <div class="button button-2" @click="moveUp"></div>
+      </div>
+      <div class="user_agreement">
+        点击即代表您同意<a href="#">《隐私政策》</a>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
+
+import subtitle0 from "@/assets/imgs/subtitle_0.svg";
+import subtitle1 from "@/assets/imgs/subtitle_1.svg";
+import subtitle2 from "@/assets/imgs/subtitle_2.svg";
+
 const hidePage = ref(false);
+const subtitles = [subtitle0, subtitle1, subtitle2];
+const colors = ["#d85050", "#7b4bed", "#80c5d2"];
+let subtitleIndex = ref(0);
+onMounted(() => {
+  const button = document.querySelector(".btn-container");
+  setInterval(() => {
+    subtitleIndex.value++;
+    button.style.setProperty("--_clr-0", colors[subtitleIndex.value % 3]);
+    button.style.setProperty("--_clr-1", colors[(subtitleIndex.value + 1) % 3]);
+    button.style.setProperty("--_clr-2", colors[(subtitleIndex.value + 2) % 3]);
+  }, 2000);
+});
 
 function moveUp() {
   const wrapper = document.querySelector(".wrapper");
@@ -26,6 +55,94 @@ function moveUp() {
 </script>
 
 <style scoped>
+.img-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.img-container > img,
+.img-container > svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cotain;
+  object-position: center;
+}
+
+.img-container > .pointer {
+  transform: rotate(30deg);
+  width: 35%;
+  inset: unset;
+  top: -30%;
+  right: -5%;
+  animation: 1s move ease-in-out infinite alternate both running;
+}
+
+.img-container > .arrow {
+  width: 35%;
+  inset: unset;
+  top: 25%;
+  right: 0;
+  animation: 3s circle ease-in-out infinite running;
+}
+
+.img-container > .right {
+  width: 28%;
+  inset: unset;
+  top: 38%;
+  left: 6%;
+  animation: 5s swing ease-in-out infinite running;
+}
+
+@keyframes move {
+  0% {
+    transform: translateX(-8%);
+  }
+  100% {
+    transform: translateX(8%);
+  }
+}
+
+@keyframes circle {
+  0% {
+    transform: translateX(0) translateY(-10px);
+  }
+  25% {
+    transform: translateX(10px) translateY(0);
+  }
+  50% {
+    transform: translateX(0) translateY(10px);
+  }
+  75% {
+    transform: translateX(-10px) translateY(0);
+  }
+  100% {
+    transform: translateX(0) translateY(-10px);
+  }
+}
+@keyframes swing {
+  0%,
+  100% {
+    transform: scale(1) translateX(-5px);
+  }
+  50% {
+    transform: scale(1.1) rotate(-10deg);
+  }
+}
+
+.user_agreement {
+  text-align: center;
+  color: var(--clr-text-muted);
+  font-size: var(--fs-100);
+  padding-top: 0.5rem;
+}
+
+.user_agreement a {
+  text-decoration: underline;
+}
+
 .wrapper {
   --_top-padding: 5svh;
   position: fixed;
@@ -42,31 +159,48 @@ function moveUp() {
 .container {
   height: 100%;
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 3rem;
-  text-align: center;
-  justify-content: space-around;
-  align-items: center;
-  padding: 5rem 1rem;
+  padding: 4svh 2rem;
+  display: grid;
+  grid-template-rows: 3fr 5fr 1.5fr 0.5fr;
+  grid-template-columns: 1fr;
+  gap: 2svh;
+  justify-content: center;
 }
 
-h1 {
-  font-size: var(--fs-700);
+.btn-container {
+  --_clr-0: #d85050;
+  --_clr-1: #80c5d2;
+  --_clr-2: #7b4bed;
+  padding: 3% 7%;
+  position: relative;
 }
 
 .button {
-  width: fit-content;
-  padding: 1rem 2rem;
-  background-color: var(--clr-accent);
   border-radius: 100rem;
-  font-size: var(--fs-500);
+  position: absolute;
+  inset: 12% 10%;
+  border: 2px black solid;
+  display: grid;
+  place-items: center;
+  font-size: var(--fs-600);
+  font-weight: 900;
+  background-color: var(--_clr-0);
   transition: all 0.2s ease-in-out;
 }
 
-.button:hover,
-:focus {
-  filter: brightness(0.9);
+.button-1 {
+  background-color: var(--_clr-1);
+  transform: translate(-8px, 5px);
+  z-index: -1;
+}
+.button-2 {
+  background-color: var(--_clr-2);
+  transform: translate(-16px, 10px);
+  z-index: -2;
+}
+
+.btn-container:has(.button:hover) .button {
+  filter: brightness(1.1);
   transform: scale(1.05);
   cursor: pointer;
 }
