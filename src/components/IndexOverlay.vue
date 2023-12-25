@@ -11,9 +11,9 @@
         <img src="@/assets/imgs/right.svg" class="right" alt="" />
       </div>
       <div class="btn-container">
-        <div class="button" @click="moveUp">查收我的报告</div>
-        <div class="button button-1" @click="moveUp"></div>
-        <div class="button button-2" @click="moveUp"></div>
+        <div class="button" @click="start">查收我的报告</div>
+        <div class="button button-1"></div>
+        <div class="button button-2"></div>
       </div>
       <div class="user_agreement">
         点击即代表您同意<a href="#">《隐私政策》</a>
@@ -43,7 +43,7 @@ onMounted(() => {
   }, 2000);
 });
 
-function moveUp() {
+function start() {
   const wrapper = document.querySelector(".wrapper");
   wrapper.style.transform = "translateY(-100vh)";
   //   wrapper.style.opacity = "0";
@@ -159,7 +159,7 @@ function moveUp() {
 .container {
   height: 100%;
   width: 100%;
-  padding: 4svh 2rem;
+  padding: var(--page-padding);
   display: grid;
   grid-template-rows: 3fr 5fr 1.5fr 0.5fr;
   grid-template-columns: 1fr;
@@ -190,18 +190,19 @@ function moveUp() {
 
 .button-1 {
   background-color: var(--_clr-1);
-  transform: translate(-8px, 5px);
-  z-index: -1;
+  transform: translate(-16px, 10px);
+  z-index: -2;
 }
 .button-2 {
   background-color: var(--_clr-2);
-  transform: translate(-16px, 10px);
-  z-index: -2;
+  transform: translate(-8px, 5px);
+  z-index: -1;
 }
 
 .btn-container:has(.button:hover) .button {
   filter: brightness(1.1);
   transform: scale(1.05);
+  background: gray;
   cursor: pointer;
 }
 </style>
