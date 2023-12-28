@@ -47,7 +47,7 @@ onMounted(async () => {
 });
 
 async function getUserInfo(token) {
-  const URL = "http://api.uni.hkupootal.com/v4/report2023/get.php";
+  const URL = "https://api.uni.hkupootal.com/v4/report2023/get.php";
   const data = {
     token: token,
   };
