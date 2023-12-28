@@ -43,10 +43,22 @@ onMounted(() => {
   }, 2000);
 });
 
+function animate() {
+  const areas = document.querySelectorAll(".page1-1 .hide");
+  let timer = 1000;
+  areas.forEach((area) => {
+    setTimeout(() => {
+      area.classList.remove("hide");
+    }, timer);
+    timer += 1000;
+  });
+}
+
 function start() {
   const wrapper = document.querySelector(".wrapper");
   wrapper.style.transform = "translateY(-100vh)";
   //   wrapper.style.opacity = "0";
+  animate();
 
   setTimeout(() => {
     hidePage.value = true;
