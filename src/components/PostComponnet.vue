@@ -41,12 +41,20 @@
       <div class="post-id">#{{ postInfo.post_id }}</div>
       <img
         class="post-avatar"
-        src="https://i.boatonland.com/avatar/hkughost.svg"
+        :src="'https://i.boatonland.com/avatar/' + postInfo.user_avatar"
         alt=""
       />
-      <div class="post-type">测试</div>
+      <div class="post-type">{{ postInfo.post_topic }}</div>
       <div class="post-data">
-        <img class="post-icon" src="@/assets/imgs/icons/sf-star.svg" alt="" />
+        <img
+          class="post-icon"
+          :src="
+            postInfo.is_following
+              ? rootPath + 'src/assets/imgs/icons/sf-star-fill.svg'
+              : rootPath + '/src/assets/imgs/icons/sf-star.svg'
+          "
+          alt=""
+        />
         <span>{{ postInfo.post_follower_num }}</span>
       </div>
       <div class="post-data">

@@ -24,3 +24,31 @@ body {
   color: var(--clr-text);
   font-family: var(--ff-primary);
 }
+
+.pages-container {
+  height: 100%;
+  position: relative;
+  scroll-snap-type: y mandatory;
+  overflow-y: scroll;
+  overflow-x: clip;
+}
+
+.page {
+  width: var(--page-width);
+  height: var(--page-height);
+  padding: var(--page-padding);
+
+  font-size: var(--fs-400);
+  font-weight: 400;
+  position: relative;
+  scroll-snap-align: start;
+}
+
+.b {
+  font-weight: 900;
+}
+
+.text-area {
+  margin-top: 3svh;
+  transition: all 1s ease-in-out;
+}

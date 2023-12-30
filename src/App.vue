@@ -8,8 +8,14 @@
         :collage="collage"
         :userInfo="userInfo.report_data"
       />
+      <Page2
+        v-if="userInfo.report_data"
+        :collageInfo="collageInfo"
+        :collage="collage"
+        :userInfo="userInfo.report_data"
+      />
       <Test />
-      <div class="copyright-label">©TripleUNI 2023</div>
+      <div class="copyright-label">©TripleUni 2023</div>
     </div>
   </main>
 </template>
@@ -19,11 +25,12 @@ import Test from "@/components/Test.vue";
 
 import IndexOverlay from "@/components/IndexOverlay.vue";
 import Page1 from "@/components/Page1.vue";
+import Page2 from "@/components/Page2.vue";
 import { onMounted, ref } from "vue";
 
 const collageInfo = {
-  name: ["噗噗", "马料水BB机", "Stardust科大空间站"],
-  nickname: ["噗噗", "BB机", "星尘"],
+  name: ["HKU噗噗", "马料水哔哔机", "科大空间站"],
+  nickname: ["噗噗", "哔哔机", "星尘"],
   creationTime: ["2020年 10月 31日", "2020年 8月 24日", "2020年 5月 2日"],
 };
 
@@ -39,7 +46,7 @@ onMounted(async () => {
       break;
     case "CUHK":
       collage.value = 1;
-      break;
+      break1;
     case "HKUST":
       collage.value = 2;
       break;
@@ -96,8 +103,8 @@ main {
 
 .copyright-label {
   position: sticky;
-  bottom: 4%;
-  left: 8%;
+  bottom: 2%;
+  left: 4%;
   width: fit-content;
   font-size: var(--fs-300);
   font-weight: 900;

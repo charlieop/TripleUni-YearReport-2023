@@ -1,5 +1,5 @@
 <template>
-  <div class="container" :style="disableScroll">
+  <div class="pages-container" :style="disableScroll">
     <div class="page page1-1">
       <div class="text-area hide">
         <p>{{ collageInfo.creationTime[collage] }}</p>
@@ -13,18 +13,12 @@
         <p>秋遇 冬熟</p>
       </div>
       <div class="text-area hide">
-        <p>
-          不知不觉 <span class="b">{{ collageInfo.nickname[collage] }}</span>
-        </p>
+        <p>不知不觉 {{ collageInfo.nickname[collage] }}</p>
         <p>已经与你携手走至2023的尽头</p>
       </div>
       <div class="text-area hide">
         <p>现在翻开记忆</p>
-        <p>
-          看看这一年你在
-          <span class="b">{{ collageInfo.nickname[collage] }}</span>
-          留下的印记吧
-        </p>
+        <p>看看这一年你在{{ collageInfo.nickname[collage] }}留下的印记吧</p>
       </div>
       <div class="arrow animated text-area"></div>
     </div>
@@ -33,11 +27,11 @@
         <p>{{ userInfo.registration_date }}</p>
         <p>万有引力让我们在那天相遇</p>
         <p>直到今天,</p>
-        <p>噗噗已经陪你度过了 {{ userInfo.days_with_triple_uni }} 个日升日落</p>
+        <p>噗噗已经陪你度过了 <span class="b">{{ userInfo.days_with_triple_uni }}</span> 个日升日落</p>
       </div>
       <div class="text-area hide">
-        <p>在迄今为止已注册的xx名用户中</p>
-        <p>你是噗噗遇到的第 {{ userInfo.registration_rank }} 个小伙伴</p>
+        <p>在迄今为止已注册的 <span class="b">xx</span> 名用户中</p>
+        <p>你是噗噗遇到的第 <span class="b">{{ userInfo.registration_rank }}</span> 个小伙伴</p>
       </div>
       <div class="text-area hide">
         <p>在初遇的这一天</p>
@@ -65,7 +59,11 @@ import PostComponnet from "@/components/PostComponnet.vue";
 
 import { computed, onMounted, toRef } from "vue";
 
-const props = defineProps(["collage", "collageInfo", "userInfo"]);
+const props = defineProps({
+  collageInfo: Object,
+  collage: Number,
+  userInfo: Object,
+});
 const collageRef = toRef(props, "collage");
 
 const disableScroll = computed(() => {
@@ -187,33 +185,19 @@ function next() {
     opacity: 0;
   }
 }
-.b {
-  font-weight: 900;
-}
 
 .hide {
   opacity: 0;
   transform: translateY(50%);
 }
 
-.text-area {
-  margin-top: 3svh;
-  transition: all 1s ease-in-out;
-}
-
-.container {
-  width: 100%;
-  height: 100%;
-  position: relative;
+.pages-container {
   background: linear-gradient(
     #ffffff 16%,
     #ebf4f6 33.58%,
     #badae2 69.1%,
     #90c3d0 96.5%
   );
-  scroll-snap-type: y mandatory;
-  overflow-y: scroll;
-  overflow-x: clip;
 }
 
 .hint {
@@ -351,18 +335,5 @@ function next() {
     transform: translateX(40%);
     filter: blur(2px);
   }
-}
-
-.page {
-  width: var(--page-width);
-  height: var(--page-height);
-  padding: var(--page-padding);
-
-  font-size: var(--fs-400);
-  font-weight: 400;
-  position: relative;
-
-  z-index: 1;
-  scroll-snap-align: start;
 }
 </style>
