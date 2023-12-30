@@ -1,44 +1,61 @@
 <template>
-  <div class="pages-container">
-    <div class="page">
-      <div class="text-area" v-if="collage == 0">
-        <p>2023年</p>
-        <p>
-          你在{{ collageInfo.nickname[collage] }}共度过了
-          <span class="b">{{ userInfo.days_with_triple_uni }}</span> 天
-        </p>
-        <p>
-          共计 <span class="b">{{ userInfo.usage_minutes }}</span> 分钟
-        </p>
-        <p>
-          相当于平均每天在{{ collageInfo.nickname[collage] }}流连
-          <span class="b">{{ Math.ceil(userInfo.usage_minutes / 365) }}</span>
-          分钟
-        </p>
+  <div class="pages-container page2">
+    <div class="page page2-1">
+      <div class="text-area hide">
+        <p>2023年里</p>
+        <!-- <div v-if="collage == 0"> -->
+        <div v-if="true">
+          <p>
+            你与{{ collageInfo.nickname[collage] }}共度过了
+            <span class="b">{{ userInfo.user_date_count }}</span> 天
+          </p>
+          <p>
+            共计 <span class="b">{{ userInfo.user_minute_count }}</span> 分钟
+          </p>
+          <p>
+            相当于平均每天在{{ collageInfo.nickname[collage] }}中流连
+            <span class="b">{{
+              Math.ceil(userInfo.user_minute_count / 365)
+            }}</span>
+            分钟
+          </p>
+        </div>
+        <div v-else>
+          <p>
+            你有
+            <span class="b"
+              >{{ Math.ceil(userInfo.user_date_count / 3.65) }}%</span
+            >
+            的日子流连于{{ collageInfo.nickname[collage] }}
+          </p>
+          <p>每一次访问</p>
+          <p>{{ collageInfo.nickname[collage] }}都很高兴与你相见</p>
+        </div>
       </div>
 
-      <div class="text-area" v-else>
-        <p>2023年</p>
-        <p>
-          你有
-          <span class="b">{{ userInfo.usage_percentage }}%</span> 的时间流连于{{
-            collageInfo.nickname[collage]
-          }}
+      <div class="text-area hide">
+        <p>你的使用时间</p>
+        <div v-if="userInfo.user_minute_count_rank">
+          <p>
+            在 <span class="b">{{ userInfo.total_user_count }}</span> 名{{
+              collageInfo.nickname[collage]
+            }}用户中
+          </p>
+          <p>
+            排名第 <span class="b">{{ userInfo.user_minute_count_rank }} </span>
+          </p>
+        </div>
+        <p v-else>
+          超过了<span class="b"
+            >{{ userInfo.user_minute_count_percentage }}% </span
+          >的{{ collageInfo.nickname[collage] }}用户
         </p>
-        <p>每次打开{{ collageInfo.nickname[collage] }}</p>
-        <p style="color: red">请策划编一些文案</p>
       </div>
-
-      <div class="text-area">
-        <p>
-          在 <span class="b">xx</span> 名{{
-            collageInfo.nickname[collage]
-          }}用户中排名第 <span class="b">xx</span>
-        </p>
+      <div class="text-area hide">
         <p>
           相当于修了
           <span class="b">{{
-            Math.ceil(userInfo.usage_minutes / 21.6) / 100
+            Math.ceil(userInfo.user_minute_count / 21.6) / 100
           }}</span>
           门{{ equivalentCourse.credit[collage] }}学分的
         </p>
@@ -47,22 +64,107 @@
         </p>
       </div>
 
-      <div class="special">
+      <div class="special hide transition">
         <div class="b special-text" v-html="shownText.text[rank].value"></div>
         <div class="keyword" v-for="word in shownText.keyword[rank]">
           {{ word }}
         </div>
       </div>
-      <img class="book" src="@/assets/imgs/enchanted-book.svg" alt="">
+      <img
+        class="book hide transition"
+        src="@/assets/imgs/enchanted-book.svg"
+        alt=""
+      />
     </div>
-    <div class="page">b</div>
-    <div class="page">c</div>
-    <div class="page"><div class="next" @click="next">点我继续</div></div>
+    <div class="page page2-2">访问时间曲线</div>
+    <div class="page page2-3">
+      <div class="text-area" v-if="userInfo.earliest_post">
+        <div class="text-area hide">
+          <p class="b header">
+            <span>
+              {{ parseInt(userInfo.earliest_post.date.split("-")[1]) }}月{{
+                parseInt(userInfo.earliest_post.date.split("-")[2])
+              }}日
+            </span>
+            <span>{{ userInfo.earliest_post.time }}</span>
+          </p>
+          <p>你比{{ collageInfo.nickname[collage] }}起的还要早</p>
+          <p>你点开的第一条树洞是:</p>
+        </div>
+        <div class="text-area hide">
+          <PostComponnet :postInfo="userInfo.earliest_post.data" />
+        </div>
+      </div>
+      <div v-else class="text-area hide special">
+        <p>你似乎从来没有在早上打开过{{ collageInfo.nickname[collage] }}</p>
+        <p>想必你的睡眠质量一定很好吧</p>
+      </div>
+      <div v-if="userInfo.latest_post">
+        <div class="text-area hide">
+          <p class="b header">
+            <span>
+              {{ parseInt(userInfo.latest_post.date.split("-")[1]) }}月{{
+                parseInt(userInfo.latest_post.date.split("-")[2])
+              }}日
+            </span>
+            <span>{{ userInfo.latest_post.time }}</span>
+          </p>
+          <p>还没睡的{{ collageInfo.nickname[collage] }}</p>
+          <p>与你与一同点开了</p>
+        </div>
+        <div class="text-area hide">
+          <PostComponnet :postInfo="userInfo.latest_post.data" />
+        </div>
+        <div class="text-area special b hide">
+          <p>一眨眼天快亮了&nbsp;&nbsp;&nbsp;</p>
+          <p>早知道不眨眼了...</p>
+        </div>
+      </div>
+      <div class="text-area special hide" v-else>
+        <p>你从来没有在深夜打开过{{ collageInfo.nickname[collage] }}</p>
+        <p>真的是一个大学牲吗?</p>
+        <p>实在是太不可思议了</p>
+      </div>
+    </div>
+    <div class="page page2-4">
+      <div class="text-area hide">
+        <p class="header b">
+          <span>
+            {{ parseInt(userInfo.user_view_longest_date.split("-")[1]) }}月{{
+              parseInt(userInfo.user_view_longest_date.split("-")[2])
+            }}日
+          </span>
+        </p>
+        <p>
+          那天居然有
+          <span class="b">{{ userInfo.user_view_longest_minute_count }}</span>
+          分钟在浏览{{ collageInfo.nickname[collage] }}
+        </p>
+      </div>
+      <div class="text-area hide">
+        <p>这一天是你这一年中</p>
+        <p>
+          陪伴{{ collageInfo.nickname[collage] }}时间
+          <span class="b special">最长</span> 的一天
+        </p>
+      </div>
+      <div class="text-area hide">
+        <p>陪完了{{ collageInfo.nickname[collage] }}</p>
+        <p>也不要忘了家人与朋友们哦</p>
+      </div>
+      <div class="emoji hide transition">🥹</div>
+      <div class="emoji hide transition">🥹</div>
+      <div class="emoji hide transition">🥹</div>
+
+      <div class="next hide" @click="next">继续查看</div>
+    </div>
   </div>
 </template>
 
 <script setup>
-import { toRef, computed } from "vue";
+import PostComponnet from "@/components/PostComponnet.vue";
+
+import { toRef, computed, onMounted } from "vue";
 
 const props = defineProps({
   collageInfo: Object,
@@ -77,7 +179,7 @@ const nickname = computed(
   () => collageInfoRef.value.nickname[collageRef.value]
 );
 const rank = computed(() => {
-  const percentage = userInfoRef.value.usage_percentage;
+  const percentage = userInfoRef.value.user_minute_count_percentage;
   if (percentage >= 95) {
     return 0;
   } else if (percentage >= 80) {
@@ -85,7 +187,7 @@ const rank = computed(() => {
   } else if (percentage >= 50) {
     return 2;
   } else {
-    return 0;
+    return 3;
   }
 });
 
@@ -132,26 +234,104 @@ function next() {
     behavior: "smooth",
   });
 }
+
+onMounted(() => {
+  const observer = new IntersectionObserver(animate, {
+    root: document.querySelector(".content-wrapper"),
+    rootMargin: "0px 0px 0px 0px",
+    threshold: 0.8,
+  });
+  const pages = document.querySelectorAll(".page2 .page");
+  pages.forEach((page) => {
+    observer.observe(page);
+  });
+});
+
+function animate(e) {
+  if (!e[0].isIntersecting) return;
+  const areas = e[0].target.querySelectorAll(".hide");
+  let timer = 500;
+  areas.forEach((area) => {
+    setTimeout(() => {
+      area.classList.remove("hide");
+    }, timer);
+    timer += 1000;
+  });
+}
 </script>
 
 <style scoped>
-.next {
-  width: 100%;
-  text-align: center;
-  padding: 20px 0;
-  background: #fff;
-  color: #000;
-  font-size: 20px;
-  font-weight: bold;
-  cursor: pointer;
-  border-radius: 10px;
+.emoji {
+  position: absolute;
+  font-size: 5em;
+}
+.emoji::after {
+  content: "🫶";
+  position: absolute;
+  font-size: var(--fs-900);
+}
+.emoji:nth-child(1 of .emoji) {
+  top: 40%;
+  left: 15%;
+}
+.emoji:nth-child(1 of .emoji)::after {
+  bottom: 20%;
+  left: 50%;
+  animation: hand1 1.5s linear infinite alternate-reverse;
+}
+
+.emoji:nth-child(2 of .emoji) {
+  top: 40%;
+  right: 15%;
+}
+.emoji:nth-child(2 of .emoji)::after {
+  bottom: 20%;
+  left: 50%;
+  animation: hand1 1.5s linear infinite alternate;
+}
+
+.emoji:nth-child(3 of .emoji) {
+  top: 57%;
+  right: 50%;
+  transform: translateX(50%);
+}
+.emoji:nth-child(3 of .emoji)::after {
+  bottom: -3%;
+  left: 50%;
+  animation: hand2 1.5s linear infinite;
+}
+
+@keyframes hand1 {
+  0% {
+    transform: translateX(-50%) rotate(60deg) translate(0, 2.75rem)
+      rotate(-60deg);
+  }
+  100% {
+    transform: translateX(-50%) rotate(-60deg) translate(0, 2.75rem)
+      rotate(60deg);
+  }
+}
+
+@keyframes hand2 {
+  0% {
+    transform: rotate(0deg) translate(0, 0.5rem) rotate(-0deg);
+  }
+  100% {
+    transform: rotate(360deg) translate(0, 0.5rem) rotate(-360deg);
+  }
+}
+.header {
+  font-size: var(--fs-500);
+  margin-top: 0.5rem;
+  display: flex;
+  gap: 1rem;
 }
 
 .special {
   position: relative;
   font-size: var(--fs-500);
   text-align: center;
-  margin-top: 10svh;
+  margin-top: 2.5rem;
 }
 
 .special-text {
@@ -160,22 +340,21 @@ function next() {
 }
 
 .book {
-    position: absolute;
-    width: 35%;
-    bottom: 10%;
-    right: 10%;
-    pointer-events: none;
-    animation: book 2s ease-in-out alternate infinite;
+  position: absolute;
+  width: 35%;
+  bottom: 5%;
+  right: 10%;
+  pointer-events: none;
+  animation: book 2s ease-in-out alternate infinite;
 }
 
 @keyframes book {
-    from {
-        transform: translateY(0.5rem);
-    }
-    to {
-        transform: translateY(-0.5rem);
-    }
-    
+  from {
+    transform: translateY(0.5rem);
+  }
+  to {
+    transform: translateY(-0.5rem);
+  }
 }
 
 .keyword {

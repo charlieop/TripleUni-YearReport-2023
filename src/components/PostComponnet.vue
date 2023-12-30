@@ -1,74 +1,80 @@
 <template>
-  <div class="post" v-if="postInfo" @click="showDetail">
-    <div class="post-header post-row">
-      <div class="post-id">#{{ postInfo.post_id }}</div>
-      <img
-        class="post-avatar"
-        :src="'https://i.boatonland.com/avatar/' + postInfo.user_avatar"
-        alt=""
-      />
-      <div class="post-type">{{ postInfo.post_topic }}</div>
-      <div class="post-data">
+  <div class="post-wrapper">
+    <div class="post" v-if="postInfo" @click="showDetail">
+      <div class="post-header post-row">
+        <div class="post-id">#{{ postInfo.post_id }}</div>
         <img
-          class="post-icon"
+          class="post-avatar"
           :src="
-            postInfo.is_following
-              ? rootPath + 'src/assets/imgs/icons/sf-star-fill.svg'
-              : rootPath + '/src/assets/imgs/icons/sf-star.svg'
+            'https://i.boatonland.com/avatar/' + postInfo.user_avatar + '.svg'
           "
           alt=""
         />
-        <span>{{ postInfo.post_follower_num }}</span>
+        <div class="post-type">{{ postInfo.post_topic }}</div>
+        <div class="post-data">
+          <img
+            class="post-icon"
+            :src="
+              postInfo.is_following
+                ? rootPath + '/src/assets/imgs/icons/sf-star-fill.svg'
+                : rootPath + '/src/assets/imgs/icons/sf-star.svg'
+            "
+            alt=""
+          />
+          <span>{{ postInfo.post_follower_num }}</span>
+        </div>
+        <div class="post-data">
+          <img
+            class="post-icon"
+            src="@/assets/imgs/icons/sf-comment.svg"
+            alt=""
+          />
+          <span>{{ postInfo.post_comment_num }}</span>
+        </div>
       </div>
-      <div class="post-data">
-        <img
-          class="post-icon"
-          src="@/assets/imgs/icons/sf-comment.svg"
-          alt=""
-        />
-        <span>{{ postInfo.post_comment_num }}</span>
+      <div class="post-content post-row">
+        <div class="post-text">
+          {{ postInfo.post_msg }}
+        </div>
       </div>
     </div>
-    <div class="post-content post-row">
-      <div class="post-text">
-        {{ postInfo.post_msg }}
-      </div>
-    </div>
-  </div>
-  <div class="dim transit" @click="hideDetail"></div>
-  <div class="post-expand transit" v-if="postInfo">
-    <div class="post-header post-row">
-      <div class="post-id">#{{ postInfo.post_id }}</div>
-      <img
-        class="post-avatar"
-        :src="'https://i.boatonland.com/avatar/' + postInfo.user_avatar"
-        alt=""
-      />
-      <div class="post-type">{{ postInfo.post_topic }}</div>
-      <div class="post-data">
+    <div class="dim transit" @click="hideDetail"></div>
+    <div class="post-expand transit" v-if="postInfo">
+      <div class="post-header post-row">
+        <div class="post-id">#{{ postInfo.post_id }}</div>
         <img
-          class="post-icon"
+          class="post-avatar"
           :src="
-            postInfo.is_following
-              ? rootPath + 'src/assets/imgs/icons/sf-star-fill.svg'
-              : rootPath + '/src/assets/imgs/icons/sf-star.svg'
+            'https://i.boatonland.com/avatar/' + postInfo.user_avatar + '.svg'
           "
           alt=""
         />
-        <span>{{ postInfo.post_follower_num }}</span>
+        <div class="post-type">{{ postInfo.post_topic }}</div>
+        <div class="post-data">
+          <img
+            class="post-icon"
+            :src="
+              postInfo.is_following
+                ? rootPath + '/src/assets/imgs/icons/sf-star-fill.svg'
+                : rootPath + '/src/assets/imgs/icons/sf-star.svg'
+            "
+            alt=""
+          />
+          <span>{{ postInfo.post_follower_num }}</span>
+        </div>
+        <div class="post-data">
+          <img
+            class="post-icon"
+            src="@/assets/imgs/icons/sf-comment.svg"
+            alt=""
+          />
+          <span>{{ postInfo.post_comment_num }}</span>
+        </div>
       </div>
-      <div class="post-data">
-        <img
-          class="post-icon"
-          src="@/assets/imgs/icons/sf-comment.svg"
-          alt=""
-        />
-        <span>{{ postInfo.post_comment_num }}</span>
-      </div>
-    </div>
-    <div class="post-content post-row">
-      <div class="post-text">
-        {{ postInfo.post_msg }}
+      <div class="post-content post-row">
+        <div class="post-text">
+          {{ postInfo.post_msg }}
+        </div>
       </div>
     </div>
   </div>
@@ -77,20 +83,23 @@
 <script setup>
 defineProps(["postInfo"]);
 
-let rootPath = window.location;
+let rootPath = new URL(window.location).pathname;
 
-function showDetail() {
-  const dim = document.querySelector(".dim");
-  const postExpand = document.querySelector(".post-expand");
+function showDetail(e) {
+  console.log(e.target);
+  const parentElement = e.target.closest(".post-wrapper");
+  const dim = parentElement.querySelector(".dim");
+  const postExpand = parentElement.querySelector(".post-expand");
   dim.style.zIndex = "999";
   postExpand.style.zIndex = "999";
   dim.classList.add("active");
   postExpand.classList.add("active");
 }
 
-function hideDetail() {
-  const dim = document.querySelector(".dim");
-  const postExpand = document.querySelector(".post-expand");
+function hideDetail(e) {
+  const parentElement = e.target.closest(".post-wrapper");
+  const dim = parentElement.querySelector(".dim");
+  const postExpand = parentElement.querySelector(".post-expand");
   dim.classList.remove("active");
   postExpand.classList.remove("active");
   setTimeout(() => {
@@ -125,6 +134,11 @@ function hideDetail() {
   overflow: clip;
   z-index: 1;
 }
+.post:not(.post-expand):hover,
+.post:not(.post-expand):focus {
+  cursor: pointer;
+  filter: brightness(0.9);
+}
 
 .transit {
   transition: all 0.5s ease-in-out;
@@ -153,7 +167,7 @@ function hideDetail() {
 }
 
 .dim {
-  position: fixed;
+  position: absolute;
   inset: 0;
   background: rgba(0, 0, 0, 0.5);
   opacity: 0;
@@ -201,25 +215,27 @@ function hideDetail() {
 .post-avatar {
   object-fit: contain;
   object-position: center;
-  width: 1.75rem;
-  height: 1.75rem;
+  width: 1.5rem;
+  height: 1.5rem;
 }
 
 .post-type {
   background-color: var(--clr-background-muted);
   color: var(--clr-text-muted);
-  padding: 0.25rem 0.75rem;
+  padding: 0.25rem 0.55rem;
   border-radius: 100rem;
   margin-right: auto;
+  font-size: var(--fs-200);
 }
 
 .post-data {
   display: flex;
   flex-direction: row;
-  gap: 0.25rem;
+  gap: 0.2rem;
   margin-left: 0.25rem;
   align-items: center;
   color: var(--clr-text-muted);
+  font-size: var(--fs-200);
 }
 
 .post-icon {

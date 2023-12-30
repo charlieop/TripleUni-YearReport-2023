@@ -3,16 +3,22 @@
     <div class="content-wrapper">
       <IndexOverlay />
       <Page1
-        v-if="userInfo.report_data"
+        v-if="userInfo.data"
         :collageInfo="collageInfo"
         :collage="collage"
-        :userInfo="userInfo.report_data"
+        :userInfo="userInfo.data"
       />
       <Page2
-        v-if="userInfo.report_data"
+        v-if="userInfo.data"
         :collageInfo="collageInfo"
         :collage="collage"
-        :userInfo="userInfo.report_data"
+        :userInfo="userInfo.data"
+      />
+      <Page3
+        v-if="userInfo.data"
+        :collageInfo="collageInfo"
+        :collage="collage"
+        :userInfo="userInfo.data"
       />
       <Test />
       <div class="copyright-label">©TripleUni 2023</div>
@@ -26,6 +32,7 @@ import Test from "@/components/Test.vue";
 import IndexOverlay from "@/components/IndexOverlay.vue";
 import Page1 from "@/components/Page1.vue";
 import Page2 from "@/components/Page2.vue";
+import Page3 from "@/components/Page3.vue";
 import { onMounted, ref } from "vue";
 
 const collageInfo = {
@@ -39,10 +46,10 @@ let userInfo = ref({ report_data: {} });
 
 onMounted(async () => {
   userInfo.value = await getUserInfo("temp");
-  console.log(userInfo.value.report_data);
-  switch (userInfo.value.report_data.user_school_label) {
+  console.log(userInfo.value.data);
+  switch (userInfo.value.data.user_school_label) {
     case "HKU":
-      collage.value = 0;
+      collage.value = 1;
       break;
     case "CUHK":
       collage.value = 1;
@@ -54,7 +61,7 @@ onMounted(async () => {
 });
 
 async function getUserInfo(token) {
-  const URL = "https://api.uni.hkupootal.com/v4/report2023/get.php";
+  const URL = "https://api.uni.hkupootal.com/v4/report2023_new/get.php";
   const data = {
     token: token,
   };
@@ -64,6 +71,9 @@ async function getUserInfo(token) {
   };
   try {
     const response = await fetch(URL, options);
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
     const data = await response.json();
     return data;
   } catch (error) {

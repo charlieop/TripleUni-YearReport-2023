@@ -22,23 +22,41 @@
       </div>
       <div class="arrow animated text-area"></div>
     </div>
-    <div class="page page1-2" v-if="collage == 0">
-      <div class="text-area hide">
-        <p>{{ userInfo.registration_date }}</p>
+    <div class="page page1-2">
+      <div class="text-area hide" v-if="displayPage">
+        <p><span class="b">{{ userInfo.user_create_date }}</span></p>
         <p>万有引力让我们在那天相遇</p>
         <p>直到今天,</p>
-        <p>噗噗已经陪你度过了 <span class="b">{{ userInfo.days_with_triple_uni }}</span> 个日升日落</p>
+        <p>
+          {{ collageInfo.nickname[collage] }}已经陪你度过了
+          <span class="b">{{ userInfo.user_create_date_till_now }}</span>
+          个日升日落
+        </p>
       </div>
-      <div class="text-area hide">
-        <p>在迄今为止已注册的 <span class="b">xx</span> 名用户中</p>
-        <p>你是噗噗遇到的第 <span class="b">{{ userInfo.registration_rank }}</span> 个小伙伴</p>
+      <div class="text-area hide" v-if="displayPage">
+        <p>
+          在迄今为止已注册的
+          <span class="b">{{ userInfo.total_user_count }}</span> 名用户中
+        </p>
+        <p>
+          你是{{ collageInfo.nickname[collage] }}遇到的第
+          <span class="b">{{ userInfo.user_create_date_rank }}</span> 个小伙伴
+        </p>
       </div>
-      <div class="text-area hide">
-        <p>在初遇的这一天</p>
-        <p>你点开的第一条噗噗是:</p>
+      <div v-if="displayPage && userInfo.first_see_post">
+        <div class="text-area hide">
+          <p>在初遇的这一天</p>
+          <p>你点开的第一条树洞是:</p>
+        </div>
+        <div class="text-area hide">
+          <PostComponnet :postInfo="userInfo.first_see_post.data" />
+        </div>
       </div>
-      <div class="text-area hide">
-        <PostComponnet :postInfo="userInfo.first_meet_post" />
+      <div v-else>
+        <div class="text-area hide">
+          <p>在初遇的这一天</p>
+          <p>你有遇到什么有趣的的树洞吗?</p>
+        </div>
       </div>
     </div>
     <img
@@ -65,10 +83,14 @@ const props = defineProps({
   userInfo: Object,
 });
 const collageRef = toRef(props, "collage");
+const userInfoRef = toRef(props, "userInfo");
+const displayPage = computed(() => {
+  return userInfoRef.value.user_create_date_till_now != undefined;
+});
 
 const disableScroll = computed(() => {
   return {
-    "overflow-y": collageRef.value == 0 ? "scroll" : "clip",
+    "overflow-y": displayPage.value ? "scroll" : "clip",
   };
 });
 
@@ -184,11 +206,6 @@ function next() {
     transform: translateY(20px);
     opacity: 0;
   }
-}
-
-.hide {
-  opacity: 0;
-  transform: translateY(50%);
 }
 
 .pages-container {
