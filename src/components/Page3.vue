@@ -1,7 +1,6 @@
 <template>
   <div class="pages-container page3">
-    <div class="page page3-1">3.1 -> 合并到4.1</div>
-    <div class="page page3-2">3.2</div>
+    <div class="page page3-2">3.2<br />等美术中...<br />请继续向下浏览</div>
     <div class="page page3-3">
       <div class="text-area" v-if="userInfo.max_follow_post">
         <div class="text-area hide">
@@ -66,7 +65,7 @@
         </div>
       </div>
       <img class="chest" src="" alt="" />
-      <div class="next" @click="next">继续查看</div>
+      <div class="next hide" @click="next">继续查看</div>
     </div>
   </div>
 </template>

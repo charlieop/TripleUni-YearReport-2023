@@ -20,7 +20,19 @@
         :collage="collage"
         :userInfo="userInfo.data"
       />
-      <Test />
+      <Page4
+        v-if="userInfo.data"
+        :collageInfo="collageInfo"
+        :collage="collage"
+        :userInfo="userInfo.data"
+      />
+      <Page5
+        v-if="userInfo.data"
+        :collageInfo="collageInfo"
+        :collage="collage"
+        :userInfo="userInfo.data"
+      />
+      <!-- <Test /> -->
       <div class="copyright-label">©TripleUni 2023</div>
     </div>
   </main>
@@ -33,6 +45,9 @@ import IndexOverlay from "@/components/IndexOverlay.vue";
 import Page1 from "@/components/Page1.vue";
 import Page2 from "@/components/Page2.vue";
 import Page3 from "@/components/Page3.vue";
+import Page4 from "@/components/Page4.vue";
+import Page5 from "@/components/Page5.vue";
+
 import { onMounted, ref } from "vue";
 
 const collageInfo = {
@@ -49,7 +64,7 @@ onMounted(async () => {
   console.log(userInfo.value.data);
   switch (userInfo.value.data.user_school_label) {
     case "HKU":
-      collage.value = 1;
+      collage.value = 0;
       break;
     case "CUHK":
       collage.value = 1;
@@ -112,9 +127,9 @@ main {
 }
 
 .copyright-label {
-  position: sticky;
+  position: fixed;
   bottom: 2%;
-  left: 4%;
+  left: calc(var(--page-width) * 0.03 + 50vw - var(--page-width) / 2);
   width: fit-content;
   font-size: var(--fs-300);
   font-weight: 900;

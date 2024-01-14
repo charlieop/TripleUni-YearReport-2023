@@ -110,7 +110,7 @@
             <span>{{ userInfo.latest_post.time }}</span>
           </p>
           <p>还没睡的{{ collageInfo.nickname[collage] }}</p>
-          <p>与你与一同点开了</p>
+          <p>与你一同点开了</p>
         </div>
         <div class="text-area hide">
           <PostComponnet :postInfo="userInfo.latest_post.data" />
