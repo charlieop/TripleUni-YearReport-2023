@@ -76,7 +76,52 @@
         alt=""
       />
     </div>
-    <div class="page page2-2">访问时间曲线</div>
+    <div class="page page2-2">
+      <div class="text-area hide">
+        <p>一天的24小时里</p>
+        <p>
+          你最常在
+          <span class="b">{{ userInfo.user_most_common_time_period }}</span>
+          {{ visitText[Math.floor(Math.random() * visitText.length)]
+          }}{{ collageInfo.nickname[collage] }}
+        </p>
+      </div>
+      <div class="text-area hide">
+        <p>在过去的365天里</p>
+        <template v-if="userInfo.user_stayup_percentage >= 60">
+          <p>
+            你居然有
+            <span class="b">{{ userInfo.user_stayup_percentage }}%</span>
+            的日子在熬夜看{{ collageInfo.nickname[collage] }}!
+          </p>
+          <p>{{ collageInfo.nickname[collage] }}感觉自己深深被爱着❤️</p>
+        </template>
+        <template v-else-if="userInfo.user_stayup_percentage >= 20">
+          <p>
+            你在
+            <span class="b">{{ userInfo.user_stayup_percentage }}%</span>
+            的天数里熬夜刷着{{ collageInfo.nickname[collage] }}
+          </p>
+          <p>能被如此对待, {{ collageInfo.nickname[collage] }}感觉很荣幸</p>
+        </template>
+        <template v-else>
+          <p>
+            你只在
+            <span class="b">{{ userInfo.user_stayup_percentage }}%</span>
+            的深夜打开了{{ collageInfo.nickname[collage] }}
+          </p>
+          <p>是拥有着传说中的《健康作息》吗?!</p>
+        </template>
+      </div>
+      <div class="text-area hide">
+        <p>大家的使用时间分布是:</p>
+        <p style="color: red; font-size: var(--fs-800)">待完成</p>
+      </div>
+      <div class="text-area hide">
+        <p>你的使用时间分布是:</p>
+        <p style="color: red; font-size: var(--fs-800)">待完成</p>
+      </div>
+    </div>
     <div class="page page2-3">
       <div class="text-area" v-if="userInfo.earliest_post">
         <div class="text-area hide">
@@ -126,7 +171,7 @@
         <p>实在是太不可思议了</p>
       </div>
     </div>
-    <div class="page page2-4">
+    <!-- <div class="page page2-4">
       <div class="text-area hide">
         <p class="header b">
           <span>
@@ -157,7 +202,7 @@
       <div class="emoji hide transition">🥹</div>
 
       <div class="next hide" @click="next">继续查看</div>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -221,6 +266,8 @@ const shownText = {
     ["多逛逛", "多逛逛哦", "多逛逛!!", "多逛逛~"],
   ],
 };
+
+const visitText = ["光顾", "访问", "浏览", "宠幸", "打开", "来到"];
 
 const equivalentCourse = {
   credit: [6, 3, 3],

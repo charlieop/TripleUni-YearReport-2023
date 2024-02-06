@@ -16,25 +16,21 @@
             class="post-icon"
             :src="
               postInfo.is_following
-                ? rootPath + '/src/assets/imgs/icons/sf-star-fill.svg'
-                : rootPath + '/src/assets/imgs/icons/sf-star.svg'
+                ? rootPath + 'imgs/icons/sf-star-fill.svg'
+                : rootPath + 'imgs/icons/sf-star.svg'
             "
             alt=""
           />
           <span>{{ postInfo.post_follower_num }}</span>
         </div>
         <div class="post-data">
-          <img
-            class="post-icon"
-            src="@/assets/imgs/icons/sf-comment.svg"
-            alt=""
-          />
+          <img class="post-icon" src="/imgs/icons/sf-comment.svg" alt="" />
           <span>{{ postInfo.post_comment_num }}</span>
         </div>
       </div>
       <div class="post-content post-row">
         <div class="post-text">
-          {{ postInfo.post_msg }}
+          {{ postInfo.post_msg.slice(0, 40) }}
         </div>
       </div>
     </div>
@@ -55,19 +51,15 @@
             class="post-icon"
             :src="
               postInfo.is_following
-                ? rootPath + '/src/assets/imgs/icons/sf-star-fill.svg'
-                : rootPath + '/src/assets/imgs/icons/sf-star.svg'
+                ? rootPath + 'imgs/icons/sf-star-fill.svg'
+                : rootPath + 'imgs/icons/sf-star.svg'
             "
             alt=""
           />
           <span>{{ postInfo.post_follower_num }}</span>
         </div>
         <div class="post-data">
-          <img
-            class="post-icon"
-            src="@/assets/imgs/icons/sf-comment.svg"
-            alt=""
-          />
+          <img class="post-icon" src="/imgs/icons/sf-comment.svg" alt="" />
           <span>{{ postInfo.post_comment_num }}</span>
         </div>
       </div>
@@ -122,7 +114,6 @@ function hideDetail(e) {
   padding-inline: 1rem;
 }
 .post {
-  width: 100%;
   height: 7.5rem;
   background-color: white;
   box-shadow: 0 0 0.3rem rgba(0, 0, 0, 0.5);
@@ -133,6 +124,7 @@ function hideDetail(e) {
   font-size: var(--fs-300);
   overflow: clip;
   z-index: 1;
+  width: auto;
 }
 .post:not(.post-expand):hover,
 .post:not(.post-expand):focus {
@@ -244,11 +236,14 @@ function hideDetail(e) {
 }
 
 .post-text {
+  max-width: 100%;
   -webkit-line-clamp: 1;
   line-clamp: 1;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  overflow: clip;
   -webkit-box-orient: vertical;
+  display: -webkit-box;
+
+  text-overflow: ellipsis;
+  overflow: clip;
+  overflow-wrap: break-word;
 }
 </style>

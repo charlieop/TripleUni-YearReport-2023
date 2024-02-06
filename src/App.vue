@@ -1,7 +1,7 @@
 <template>
   <main scroll="no">
     <div class="content-wrapper">
-      <IndexOverlay />
+      <!-- <IndexOverlay />
       <Page1
         v-if="userInfo.data"
         :collageInfo="collageInfo"
@@ -19,7 +19,7 @@
         :collageInfo="collageInfo"
         :collage="collage"
         :userInfo="userInfo.data"
-      />
+      /> -->
       <Page4
         v-if="userInfo.data"
         :collageInfo="collageInfo"
@@ -27,6 +27,12 @@
         :userInfo="userInfo.data"
       />
       <Page5
+        v-if="userInfo.data"
+        :collageInfo="collageInfo"
+        :collage="collage"
+        :userInfo="userInfo.data"
+      />
+      <Page6
         v-if="userInfo.data"
         :collageInfo="collageInfo"
         :collage="collage"
@@ -47,6 +53,7 @@ import Page2 from "@/components/Page2.vue";
 import Page3 from "@/components/Page3.vue";
 import Page4 from "@/components/Page4.vue";
 import Page5 from "@/components/Page5.vue";
+import Page6 from "@/components/Page6.vue";
 
 import { onMounted, ref } from "vue";
 

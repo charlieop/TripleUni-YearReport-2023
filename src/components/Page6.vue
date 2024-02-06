@@ -1,19 +1,9 @@
 <template>
-  <div class="pages-container page5">
-    <div class="page page5-1">
-      <p>这里是page5.1</p>
-      <p>展示遗忘的树洞</p>
-      <p style="color: red; font-size: var(--fs-800)">待完成</p>
-    </div>
-    <div class="page page5-2">
-      <p>这里是page5.2</p>
-      <p>展示搜索</p>
-      <p style="color: red; font-size: var(--fs-800)">待完成</p>
-    </div>
-    <div class="page page5-3">
-      <p>这里是page5.3</p>
-      <p>推销网页版</p>
-      <p style="color: red; font-size: var(--fs-800)">待完成</p>
+  <div class="pages-container page6">
+    <div class="page page6-1" style="color: whitesmoke">
+      <p>这里是第六页</p>
+      <p>请在此写canvas</p>
+      <p>背景最终会是一个linear gradient, 但是还没定是什么颜色</p>
     </div>
   </div>
 </template>
@@ -33,21 +23,13 @@ const collageInfoRef = toRef(props, "collageInfo");
 const collageRef = toRef(props, "collage");
 const userInfoRef = toRef(props, "userInfo");
 
-function next() {
-  const container = document.querySelector(".content-wrapper");
-  container.scrollBy({
-    top: container.clientHeight,
-    behavior: "smooth",
-  });
-}
-
 onMounted(() => {
   const observer = new IntersectionObserver(animate, {
     root: document.querySelector(".content-wrapper"),
     rootMargin: "0px 0px 0px 0px",
     threshold: 0.8,
   });
-  const pages = document.querySelectorAll(".page5 .page");
+  const pages = document.querySelectorAll(".page6 .page");
   pages.forEach((page) => {
     observer.observe(page);
   });
@@ -64,10 +46,18 @@ function animate(e) {
     timer += 1000;
   });
 }
+
+function next() {
+  const container = document.querySelector(".content-wrapper");
+  container.scrollBy({
+    top: container.clientHeight,
+    behavior: "smooth",
+  });
+}
 </script>
 
 <style scoped>
 .pages-container {
-  background: linear-gradient(180deg, #57904d 5%, #008bcd 40%, #00b9ff 95%);
+  background: linear-gradient(180deg, #00B9FF 10%, #D3F4FF 90%);
 }
 </style>

@@ -64,8 +64,18 @@
       </template>
       <p class="lyric">「你分享的点点滴滴，定能给别人送去暖意」</p>
     </div>
+    <div class="group">
+      <p class="lyric">轨迹改变</p>
+      <p class="lyric">角落交错</p>
+      <p>非同一般的你</p>
+      <p>参与了{{ userInfo.user_comment_count }}次树洞讨论</p>
+      <p>在{{ userInfo.user_vote_count }}个投票中发表了见解</p>
+      <p>高调围观了{{ userInfo.user_follow_count }}个树洞</p>
+      <p>还向其他用户发送了{{ userInfo.user_pm_count }}条私信</p>
+      <p class="lyric">「十面埋伏, 愿你我不再错过」</p>
+    </div>
   </div>
-  <div class="pages-container page4-2">
+  <div class="pages-container page4-2 page4">
     <div
       class="specialPosts"
       v-if="
@@ -74,9 +84,9 @@
         userInfo.most_follow_post
       "
     >
-      <h2>你发布的树洞中<br />那些「顶流」般的存在</h2>
+      <h2 class="hide transition">你发布的树洞中<br />那些「顶流」般的存在</h2>
       <div class="horizontal_scroller">
-        <div class="card" v-if="userInfo.most_view_post">
+        <div class="card hide transition" v-if="userInfo.most_view_post">
           <p>
             <span class="b">阅读量</span> 最高达到了
             <span class="b">{{ userInfo.most_view_post.data.post_view }}</span>
@@ -86,7 +96,7 @@
             :postInfo="userInfo.most_view_post.data"
           ></PostComponnet>
         </div>
-        <div class="card" v-if="userInfo.most_comment_post">
+        <div class="card hide transition" v-if="userInfo.most_comment_post">
           <p>
             <span class="b">评论数</span> 最高达到了
             <span class="b">{{
@@ -98,7 +108,7 @@
             :postInfo="userInfo.most_comment_post.data"
           ></PostComponnet>
         </div>
-        <div class="card" v-if="userInfo.most_follow_post">
+        <div class="card hide transition" v-if="userInfo.most_follow_post">
           <p>
             <span class="b">围观数</span> 最高达到了
             <span class="b">{{
@@ -112,31 +122,18 @@
         </div>
       </div>
     </div>
-    <div class="statictics">
-      <h2>非同一般的你</h2>
-      <p class="auto-scroller">
-        <span>一共参与了:</span>
-        <span class="data">
-          <template v-for="i in [0, 1]">
-            <span>
-              <span class="b">{{ userInfo.user_comment_count }}</span
-              >次 评论
-            </span>
-            <span>
-              <span class="b">{{ userInfo.user_vote_count }}</span
-              >次 投票
-            </span>
-            <span>
-              <span class="b">{{ userInfo.user_follow_count }}</span
-              >次 围观
-            </span>
-            <span>
-              <span class="b">{{ userInfo.user_pm_count }}</span
-              >次 私信
-            </span>
-          </template>
-        </span>
-      </p>
+    <div
+      class="keyWords hide text-area"
+      v-if="userInfo.user_most_post_word_list"
+    >
+      <p>你发布的帖子中</p>
+      <p>频频出现:</p>
+      <div>
+        <span v-for="word in userInfo.user_most_post_word_list.slice(0, 3)">
+          {{ word }}</span
+        >
+      </div>
+      <p>它们是否是你许多纷飞思绪的源头呢？</p>
     </div>
   </div>
 </template>
@@ -153,6 +150,16 @@ const props = defineProps({
 });
 
 onMounted(() => {
+  const observer = new IntersectionObserver(animate, {
+    root: document.querySelector(".content-wrapper"),
+    rootMargin: "0px 0px 0px 0px",
+    threshold: 0.8,
+  });
+  const pages = document.querySelectorAll(".page4");
+  pages.forEach((page) => {
+    observer.observe(page);
+  });
+
   const lines = document.querySelectorAll(".pages-container.page4-1 p");
   const activeObserver = new IntersectionObserver(
     (entries) => {
@@ -165,7 +172,7 @@ onMounted(() => {
       });
     },
     {
-      rootMargin: "-50% 0px -50% 0px",
+      rootMargin: "-45% 0px -45% 0px",
       threshold: 0,
     }
   );
@@ -191,6 +198,18 @@ onMounted(() => {
   });
 });
 
+function animate(e) {
+  if (!e[0].isIntersecting) return;
+  const areas = e[0].target.querySelectorAll(".hide");
+  let timer = 500;
+  areas.forEach((area) => {
+    setTimeout(() => {
+      area.classList.remove("hide");
+    }, timer);
+    timer += 1000;
+  });
+}
+
 const collageInfoRef = toRef(props, "collageInfo");
 const collageRef = toRef(props, "collage");
 const userInfoRef = toRef(props, "userInfo");
@@ -203,7 +222,7 @@ const userInfoRef = toRef(props, "userInfo");
 
 .page4-1 {
   background: linear-gradient(#e49292 15%, #f2b823 85%);
-  padding-block: 70svh;
+  padding-block: 70svh 80svh;
   text-align: center;
   padding-inline: var(--page-padding);
   color: #ffffff70;
@@ -257,7 +276,7 @@ const userInfoRef = toRef(props, "userInfo");
   gap: 1rem;
   overflow-x: scroll;
   scroll-snap-type: x mandatory;
-  padding-bottom: 2rem;
+  padding-bottom: 1rem;
 }
 .horizontal_scroller::before,
 .horizontal_scroller::after {
@@ -273,7 +292,7 @@ const userInfoRef = toRef(props, "userInfo");
   background-color: #ffffff39;
   border: 1px solid #ffffff;
   border-radius: 0.5rem;
-  padding: 3rem 1rem;
+  padding: 3.5rem 1rem;
   gap: 3rem;
   display: flex;
   flex-direction: column;
@@ -283,53 +302,19 @@ const userInfoRef = toRef(props, "userInfo");
   font-size: var(--fs-400);
   padding-left: 0.5ch;
 }
-
-.statictics > *:not(h2) {
-  margin-left: 3rem;
+.card p .b {
+  font-size: var(--fs-600);
 }
 
-.auto-scroller {
-  --_line-height: 2rem;
-  position: relative;
-  overflow: hidden;
-  height: var(--_line-height);
-  line-height: var(--_line-height);
+.keyWords {
+  padding-inline: var(--page-padding);
   font-size: var(--fs-400);
-  color: #ffffffcc;
-  display: flex;
-  flex-direction: row;
-  gap: 2rem;
+  gap: 1rem;
 }
-
-.auto-scroller .data {
-  display: flex;
-  flex-direction: column;
-}
-
-.auto-scroller .data {
-  animation: scroll 9s infinite ease-in-out;
-}
-
-@keyframes scroll {
-  0%,
-  20% {
-    transform: translateY(0);
-  }
-  28%,
-  40% {
-    transform: translateY(calc(-1 * var(--_line-height)));
-  }
-  48%,
-  60% {
-    transform: translateY(calc(-2 * var(--_line-height)));
-  }
-  68%,
-  80% {
-    transform: translateY(calc(-3 * var(--_line-height)));
-  }
-  88%,
-  100% {
-    transform: translateY(calc(-4 * var(--_line-height)));
-  }
+.keyWords span {
+  font-size: var(--fs-500);
+  font-weight: 900;
+  padding-inline: 0.5rem;
+  gap: 1rem;
 }
 </style>
