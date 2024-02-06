@@ -43,7 +43,7 @@
       </div>
 
 
-      <p style="font-size:var(--fs-300); text-align: center; margin-top: 1rem;"> &uarr; 长按保存分享</p>
+      <p style="font-size:var(--fs-300); text-align: center; margin-top: 0.7rem;"> &uarr; 长按保存分享</p>
 
       <div style="display: flex; justify-content: space-between;">
         <button @click="showId = !showId; getImage();" class="buttons">{{ showId ? '隐藏ID' : '显示ID' }}</button>
@@ -283,7 +283,7 @@ function next() {
 }
 
 .frame-outer {
-  margin-top: 0.5rem;
+  margin-top: 5vw;
   position: relative;
   width: 100%;
   aspect-ratio: 1 / 1.57;
@@ -292,8 +292,6 @@ function next() {
   justify-content: center;
   align-items: flex-start;
   z-index: 1;
-
-
 }
 
 .frame-inner {
@@ -319,6 +317,7 @@ function next() {
   height: 80%;
   z-index: 1;
   background-color: white;
+  
 }
 
 .content {
@@ -331,7 +330,7 @@ function next() {
 .image-outer {
   /* margin-top: 2rem; */
   width: 100%;
-  margin-top: 1.4rem;
+  margin-top: 1.5rem;
   display: flex;
   align-items: flex-start;  
   justify-content: center;
