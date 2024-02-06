@@ -1,7 +1,7 @@
 <template>
   <main scroll="no">
     <div class="content-wrapper">
-      <!-- <IndexOverlay />
+      <IndexOverlay />
       <Page1
         v-if="userInfo.data"
         :collageInfo="collageInfo"
@@ -19,7 +19,7 @@
         :collageInfo="collageInfo"
         :collage="collage"
         :userInfo="userInfo.data"
-      /> -->
+      />
       <Page4
         v-if="userInfo.data"
         :collageInfo="collageInfo"
