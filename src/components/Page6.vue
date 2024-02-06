@@ -20,7 +20,7 @@
             <div v-else></div>
           </div>
 
-          <div style="display: flex; flex-direction: column; margin-bottom: 1.8rem; font-size: var(--fs-primary);">
+          <div style="display: flex; flex-direction: column;  font-size: var(--fs-primary);">
             <p class="accent-text">{{ title1 }}</p>
             <div style="align-self: flex-end;">
               <p style="color: black; display: inline; font-size: 1rem; font-weight: 500;">在</p> 
@@ -29,11 +29,12 @@
             
           </div>
 
-          <p style="font-size:medium; text-align: center;">{{ collage_nickname + '恭喜你达成了以下成就:' }}</p>
+          <p style="font-size:medium; text-align: center; margin: 1rem 0;">{{ collage_nickname + '恭喜你达成了以下成就:' }}</p>
 
-          <div style="display: flex; width: 100%; justify-content: center; margin-top: 1.3rem;">
-            <div class="acheivements" >
-              {{ acheivements[acheivement_idx] }}
+          <div style="display: flex; width: 100%; justify-content: space-between;">
+            <div class="acheivements" v-for="item in displayed_acheivements" style="display: flex; flex-direction: column; justify-content: space-between;">
+              <pre style="font-size: 0.9rem;  white-space: pre-wrap; margin-bottom: 0.4rem; font-weight: 3rem; line-height: 1rem;">{{ item.slogan }}</pre>
+              <p style="font-size: 0.6rem; white-space: pre-wrap; line-height: 0.7rem;">{{ item.detail }}</p>
             </div>
           </div>
 
@@ -78,8 +79,11 @@ const collage_nickname = ref(collageInfoRef.value.nickname[collageRef.value]);
 const title1 = ref(userInfoRef.value.title_1.replace('REPLACE', collage_nickname.value).replace(/「.*」/g, ''));
 const title2 = ref(userInfoRef.value.title_2.replace('REPLACE', collage_nickname.value).replace(/「.*」/g, '').replaceAll('！','!').slice(1));
 
-const acheivements = ref([ '陪伴噗噗超过一年', '时间排名为前30%', '熬夜比例超过50%'])
-const acheivement_idx = ref(0)
+const acheivements = ref([ {detail: "登陆时长\n"+userInfoRef.value.user_minute_count+"分钟"}, 
+  {detail: "发布树洞\n"+userInfoRef.value.user_post_count+"条"},
+  // {detail: "互动超过"+userInfoRef.value.user_view_post_count+"次"},
+  ])
+const displayed_acheivements = ref([])
 
 onMounted(() => {
   const observer = new IntersectionObserver(animate, {
@@ -91,6 +95,68 @@ onMounted(() => {
   pages.forEach((page) => {
     observer.observe(page);
   });
+  
+
+  if (userInfoRef.value.user_minute_count < 50) {
+    acheivements.value[0].slogan = collage_nickname.value + "纯路人"
+  } else if (userInfoRef.value.user_minute_count < 100) {
+    acheivements.value[0].slogan = "玩转\n" + collage_nickname.value
+  } else {
+    acheivements.value[0].slogan = "荣耀\n登顶"
+  }
+
+  if (userInfoRef.value.user_post_count < 10) {
+    acheivements.value[1].slogan = "沉默\n是金"
+  } else if (userInfoRef.value.user_post_count < 60) {
+    acheivements.value[1].slogan = "洞瘾\n大发"
+  } else {
+    acheivements.value[1].slogan = "话题\n制造机"
+  }
+
+  if (userInfoRef.value.user_view_post_count > 50 && userInfoRef.value.user_view_post_count <= 100) {
+    acheivements.value.push({detail: "浏览树洞\n"+userInfoRef.value.user_view_post_count+"条", slogan: collage_nickname.value + "\n粉丝"})
+  } else if (userInfoRef.value.user_view_post_count > 100) {
+    acheivements.value.push({detail: "浏览树洞\n"+userInfoRef.value.user_view_post_count+"条", slogan: collage_nickname.value + "\n大咖"})
+  } 
+
+  if (userInfoRef.value.user_stayup_percentage < 10) {
+    acheivements.value.push({detail: "熬夜比例\n"+Math.round(userInfoRef.value.user_stayup_percentage)+"%", slogan: "养生\n达人"})
+  } else if (userInfoRef.value.user_stayup_percentage > 70) {
+    acheivements.value.push({detail: "熬夜比例\n"+Math.round(userInfoRef.value.user_stayup_percentage)+"%", slogan: "夜猫子"})
+  }
+
+  if (userInfoRef.value.search_count > 10) {
+    acheivements.value.push({detail: "使用搜索\n"+Math.round(userInfoRef.value.user_stayup_percentage)+"次", slogan: "好奇\n宝宝"})
+  }
+
+  if (userInfoRef.value.user_minute_count_web ) {
+    acheivements.value.push({detail: "使用过\nWeb端", slogan: "紧追\n潮流"})
+  }
+
+  if (userInfoRef.value.user_follow_count > 5 && userInfoRef.value.user_follow_count <= 10) {
+    acheivements.value.push({detail: "围观了\n"+userInfoRef.value.user_follow_count+"条", slogan: "小小\n收藏家"})
+  } else if (userInfoRef.value.user_follow_count > 10) {
+    acheivements.value.push({detail: "围观了\n"+userInfoRef.value.user_follow_count+"条", slogan: "超级\n收藏家"})
+  } 
+
+  if (userInfoRef.value.user_vote_count > 10) {
+    acheivements.value.push({detail: "投票了\n"+userInfoRef.value.user_vote_count+"次", slogan: "投票\n爱好者"})
+  }
+
+  if (userInfoRef.value.user_pm_count > 10 && userInfoRef.value.user_pm_count <= 30) {
+    acheivements.value.push({detail: "发送私信\n"+userInfoRef.value.user_pm_count+"条", slogan: "谈天\n说地"})
+  } else if (userInfoRef.value.user_pm_count > 30) {
+    acheivements.value.push({detail: "发送私信\n"+userInfoRef.value.user_pm_count+"条", slogan: "社牛\n大爆发"})
+  }
+
+  if (userInfoRef.value.user_comment_count > 5 && userInfoRef.value.user_comment_count <= 10) {
+    acheivements.value.push({detail: "评论了\n"+userInfoRef.value.user_comment_count+"条", slogan: "真知\n灼见"})
+  } else if (userInfoRef.value.user_comment_count > 10) {
+    acheivements.value.push({detail: "评论了\n"+userInfoRef.value.user_comment_count+"条", slogan: "万众\n瞩目"})
+  } 
+
+
+  displayed_acheivements.value = randomSelection(3, acheivements.value)
   getImage();
   // draw(true);
 
@@ -151,8 +217,23 @@ function draw(withName) {
 }
 
 function changeAcheimentsIdx(){
-  acheivement_idx.value = (acheivement_idx.value + 1) % acheivements.value.length
+  displayed_acheivements.value = randomSelection(3, acheivements.value)
   getImage()
+}
+
+function randomSelection (n, originalArray){
+  let newArr = [];
+  if (n >= originalArray.length) {
+    return originalArray;
+  }
+  for (let i = 0; i < n; i++) {
+    let newElem = originalArray[Math.floor(Math.random() * originalArray.length)];
+    while (newArr.includes(newElem)) {
+      newElem = originalArray[Math.floor(Math.random() * originalArray.length)];
+    }
+    newArr.push(newElem);
+  }
+  return newArr;
 }
 
 function getImage() {
@@ -250,7 +331,7 @@ function next() {
 .image-outer {
   /* margin-top: 2rem; */
   width: 100%;
-  margin-top: 1.7rem;
+  margin-top: 1.4rem;
   display: flex;
   align-items: flex-start;  
   justify-content: center;
@@ -261,6 +342,7 @@ function next() {
 }
 
 .rendered-image {
+  align-self: flex-start;
   width: 95%;
   z-index: 6;
 }
@@ -288,11 +370,12 @@ function next() {
 }
 
 .acheivements{
-  width: fit-content;
-  border: #ffb235 3px solid;
+  text-align: center;
+  width: 30%;
+  border: #ffb235 1px solid;
   background-color: #f9f0d1;
-  border-radius: 20px;
-  padding: 0.3rem 0.9rem;
+  border-radius: 10px;
+  padding: 0.5rem 0.3rem;
 }
 
 .buttons {
