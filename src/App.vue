@@ -91,8 +91,14 @@ const testToken2 =
 const testToken3 =
   "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJTdGFyZHVzdOenkeWkp-epuumXtOermSIsImF1ZCI6IlVTVGVyIiwiaWF0IjoxNzA3MjY2NTM4LjMzOTg1MiwiZXhwIjoxNzA5ODU4NTM4LjMzOTg1MiwidXNlcl9pdHNjIjoic3BjaGFuYWUiLCJ1c2VyX3NjaG9vbF9sYWJlbCI6IlVTVCIsInBsYXRmb3JtIjoid2ViIn0.tjajHIHeBoVtGGrh1V1hAS0pvRi6Qe_MAA54LH3ndU4";
 const falseToken = "haha";
+
+// const userToken = new URL(location.href).searchParams.get('token')
+
+// For Testing only !!!!
+const userToken = new URL(location.href).searchParams.get('token')? new URL(location.href).searchParams.get('token') : testToken1;
+
 onMounted(async () => {
-  userInfo.value = await getUserInfo(testToken1);
+  userInfo.value = await getUserInfo(userToken);
 
   if (userInfo.value.code >= 800) {
     console.log("Error with code", userInfo.value.code);
