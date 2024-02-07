@@ -23,11 +23,15 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from "vue";
+import { onMounted, ref, defineProps } from "vue";
 
 import subtitle0 from "@/assets/imgs/subtitle_0.svg";
 import subtitle1 from "@/assets/imgs/subtitle_1.svg";
 import subtitle2 from "@/assets/imgs/subtitle_2.svg";
+
+const props = defineProps({
+  loaded: Boolean,
+});
 
 const hidePage = ref(false);
 const subtitles = [subtitle0, subtitle1, subtitle2];
@@ -55,6 +59,10 @@ function animate() {
 }
 
 function start() {
+  if (!props.loaded){
+    console.log("not loaded");
+    return;
+  };
   const wrapper = document.querySelector(".wrapper");
   wrapper.style.transform = "translateY(-100vh)";
   //   wrapper.style.opacity = "0";

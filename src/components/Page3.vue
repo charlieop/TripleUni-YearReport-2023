@@ -27,11 +27,7 @@
       <div class="hide text-area">
         <p>{{ topicText }}</p>
       </div>
-      <img
-        class="icon hide transition"
-        :src="topicImg"
-        alt=""
-      />
+      <img class="icon hide transition" :src="topicImg" alt="" />
     </div>
     <div class="page page3-3">
       <div class="text-area" v-if="userInfo.max_follow_post">
@@ -46,7 +42,8 @@
             <span class="b">{{
               userInfo.max_follow_post.data.post_follower_num
             }}</span>
-            人围观, 你是第 <span class="b">{{ userInfo.max_follow_post.rank }}</span> 个
+            人围观, 你是第
+            <span class="b">{{ userInfo.max_follow_post.rank }}</span> 个
           </p>
         </div>
         <div class="text-area hide">
@@ -78,7 +75,7 @@
           <PostComponnet :postInfo="userInfo.min_follow_post.data" />
         </div>
         <div class="text-area b center hide">
-          <p>这就是眼光毒辣的收藏夹吗?!</p>
+          <p>这就是眼光毒辣的收藏家吗?!</p>
         </div>
       </div>
       <div class="text-area special hide" v-else>
