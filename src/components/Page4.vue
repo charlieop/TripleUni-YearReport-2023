@@ -260,7 +260,7 @@ const userInfoRef = toRef(props, "userInfo");
 
 .page4-2 {
   background: linear-gradient(#f2b823 0%, #96b255 55%, #57904d 95%);
-  padding-block: 4rem 0;
+  padding-block: 3rem 0;
 }
 
 .page4-2 h2 {
@@ -276,7 +276,7 @@ const userInfoRef = toRef(props, "userInfo");
   gap: 1rem;
   overflow-x: scroll;
   scroll-snap-type: x mandatory;
-  padding-bottom: 1rem;
+  padding-bottom: 0.5rem;
 }
 .horizontal_scroller::before,
 .horizontal_scroller::after {
@@ -288,11 +288,11 @@ const userInfoRef = toRef(props, "userInfo");
 .card {
   scroll-snap-align: center;
   flex-shrink: 0;
-  width: 90%;
+  width: 95%;
   background-color: #ffffff39;
   border: 1px solid #ffffff;
   border-radius: 0.5rem;
-  padding: 3.5rem 1rem;
+  padding: 2.5rem 1rem;
   gap: 3rem;
   display: flex;
   flex-direction: column;

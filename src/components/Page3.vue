@@ -46,10 +46,7 @@
             <span class="b">{{
               userInfo.max_follow_post.data.post_follower_num
             }}</span>
-            人围观
-          </p>
-          <p>
-            你是第 <span class="b">{{ userInfo.max_follow_post.rank }}</span> 个
+            人围观, 你是第 <span class="b">{{ userInfo.max_follow_post.rank }}</span> 个
           </p>
         </div>
         <div class="text-area hide">
