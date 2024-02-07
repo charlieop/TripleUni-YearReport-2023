@@ -1,7 +1,7 @@
 <template>
   <div class="page page5_2">
     <div class="header">
-      <img src="@/assets/imgs/tech-pattern.svg" alt="" class="tech-pattern" />
+      <img src="https://i.boatonland.com/report2023/tech-pattern.svg" alt="" class="tech-pattern" />
 
       <div class="header-text">
         <p class="header-text-1">{{ collageInfo.nickname[collage] }}</p>

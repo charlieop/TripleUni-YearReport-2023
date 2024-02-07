@@ -56,7 +56,6 @@
 <script setup>
 
 import { toRef, computed, onMounted, ref } from "vue";
-import instax_img from "@/assets/imgs/instax-frame.svg";
 import { toPng } from 'html-to-image';
 
 const props = defineProps({
@@ -169,7 +168,7 @@ function draw(withName) {
   ctx.canvas.height = document.getElementById("frame-outer").offsetHeight;
   // Load assest
   const instax_frame = new Image();
-  instax_frame.src = instax_img
+  instax_frame.src = "https://i.boatonland.com/report2023/instax-frame.svg"
   let frame_width = canvas.width
   let frame_height = canvas.width * 1.47531172
   let margin = canvas.width / 9

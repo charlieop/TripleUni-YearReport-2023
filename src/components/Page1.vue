@@ -61,13 +61,13 @@
     </div>
     <img
       class="earth"
-      src="@/assets/imgs/earth.svg"
+      src="https://i.boatonland.com/report2023/earth.svg"
       alt=""
       @click="onClickAction"
     />
-    <img class="bird" src="@/assets/imgs/bird.svg" alt="" />
-    <img class="cloud group1" src="@/assets/imgs/cloud1.svg" alt="" />
-    <img class="cloud group2" src="@/assets/imgs/cloud2.svg" alt="" />
+    <img class="bird" src="https://i.boatonland.com/report2023/bird.svg" alt="" />
+    <img class="cloud group1" src="https://i.boatonland.com/report2023/cloud1.svg" alt="" />
+    <img class="cloud group2" src="https://i.boatonland.com/report2023/cloud2.svg" alt="" />
     <div class="hint" @click="onClickAction">继续查看</div>
   </div>
 </template>

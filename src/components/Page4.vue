@@ -86,7 +86,7 @@
     >
       <h2 class="hide transition">
         你发布的树洞中<br />那些<img
-          src="@/assets/imgs/top.svg"
+          src="https://i.boatonland.com/report2023/top.svg"
           alt="top"
           class="top"
         />
@@ -235,9 +235,8 @@ function animate(e) {
   });
 }
 
-let rootPath = new URL(window.location).pathname;
 function getStickerPath(i) {
-  return rootPath + "imgs/sticker" + i + ".png";
+  return "https://i.boatonland.com/report2023/sticker" + i + ".png";
 }
 
 const collageInfoRef = toRef(props, "collageInfo");

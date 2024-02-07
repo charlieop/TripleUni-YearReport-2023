@@ -66,7 +66,7 @@
           {{ word }}
         </div>
       </div>
-      <img class="book hide transition" src="@/assets/imgs/enchanted-book.svg" alt="" />
+      <img class="book hide transition" src="https://i.boatonland.com/report2023/enchanted-book.svg" alt="" />
     </div>
     <div class="page page2-2">
       <div class="text-area hide">

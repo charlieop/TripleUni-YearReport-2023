@@ -37,11 +37,11 @@
           >
         </p>
         <p>
-          小程序使用了:
+          小程序使用了
           <span class="b">{{ userInfo.user_minute_count_wechat }}</span> 分钟
         </p>
         <p>
-          而网页端则使用了:
+          而网页端则使用了
           <span class="b">{{ userInfo.user_minute_count_web }}</span> 分钟
         </p>
       </div>
@@ -68,19 +68,13 @@
         </p>
         <p>第一次来到了{{ collageInfo.nickname[collage] }}</p>
       </div>
-      <div class="text-area hide" v-if="collage != 1">
+      <div class="text-area hide">
         <p>{{ collageInfo.name[collage] }}也向所有用户开放了小程序版本</p>
         <p>
           微信搜索
-          <span class="b">{{
-            collage == 0 ? "薄扶林噗噗" : "科大空间站"
-          }}</span>
+          <span class="b">Triple Uni</span>
           即可直达!
         </p>
-      </div>
-      <div class="text-area hide" v-else>
-        <p>再等等!</p>
-        <p>马料水哔哔机的小程序版本很快就回来了!</p>
       </div>
     </template>
     <template v-else>

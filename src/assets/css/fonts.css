@@ -5,7 +5,7 @@
   font-weight: 400;
   src: local("AlibabaPuHuiTi Regular"),
     /* Local font with weight 400 */
-      url("@/assets/fonts/AlibabaPuHuiTi-Regular.woff2") format("truetype");
+      url("https://i.boatonland.com/report2023/AlibabaPuHuiTi-Regular.woff2") format("truetype");
   font-display: swap;
 }
 
@@ -14,7 +14,7 @@
   font-weight: 700;
   src: local("AlibabaPuHuiTi Bold"),
     /* Local font with weight 700 */
-      url("@/assets/fonts/AlibabaPuHuiTi-Bold.woff2") format("truetype");
+      url("https://i.boatonland.com/report2023/AlibabaPuHuiTi-Bold.woff2") format("truetype");
   font-display: swap;
 }
 

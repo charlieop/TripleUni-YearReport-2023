@@ -140,26 +140,25 @@ var topicText = computed(() => {
   }
 });
 
-let rootPath = new URL(window.location).pathname;
 var topicImg = computed(() => {
   switch (userInfoRef.value.user_most_view_topic) {
     case "分享":
     case "学业":
     case "求职":
     case "UNI":
-      return rootPath + "imgs/enchanted-book.svg";
+      return "https://i.boatonland.com/report2023/enchanted-book.svg";
     case "情感":
     case "随写":
     case "树洞":
-      return rootPath + "imgs/heart.svg";
+      return "https://i.boatonland.com/report2023/heart.svg";
     case "SingCon":
     case "毕业":
     case "投票":
-      return rootPath + "imgs/notes.svg";
+      return "https://i.boatonland.com/report2023/notes.svg";
     case "跳蚤":
     case "美食":
     default:
-      return rootPath + "imgs/chicken.svg";
+      return "https://i.boatonland.com/report2023/chicken.svg";
   }
 });
 
@@ -176,7 +175,7 @@ onMounted(() => {
 });
 
 function getStickerPath(i) {
-  return rootPath + "imgs/sticker" + i + ".png";
+  return "https://i.boatonland.com/report2023/sticker" + i + ".png";
 }
 
 function animate(e) {

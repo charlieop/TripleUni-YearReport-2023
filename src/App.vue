@@ -84,18 +84,8 @@ let loaded = computed(() => {
   return userInfo.value.data != undefined;
 });
 
-const testToken1 =
-  "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJIS1XlmZflmZciLCJhdWQiOiJIS1VlciIsImlhdCI6MTcwNjE1MjA0Ni42NDU1NzUsImV4cCI6MTcwODc0NDA0Ni42NDU1NzUsInVzZXJfaXRzYyI6ImxzdHN0YXIiLCJ1c2VyX3NjaG9vbF9sYWJlbCI6IkhLVSIsInBsYXRmb3JtIjoid2ViIn0.h4_LNXcqIiGht_Aq0x8FnrdlemW2eAgGW_BcSSb7HHI";
-const testToken2 =
-  "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJIS1XlmZflmZciLCJhdWQiOiJIS1VlciIsImlhdCI6MTcwNzI2NjU2Ny45MDgxMjEsImV4cCI6MTcwOTg1ODU2Ny45MDgxMjEsInVzZXJfaXRzYyI6Im1vbmljYTAwIiwidXNlcl9zY2hvb2xfbGFiZWwiOiJIS1UiLCJwbGF0Zm9ybSI6IndlYiJ9.nZqgUVUnDezP84ThKqnQZRGc-LcYNo5mf7XW8IhpWJc";
-const testToken3 =
-  "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJTdGFyZHVzdOenkeWkp-epuumXtOermSIsImF1ZCI6IlVTVGVyIiwiaWF0IjoxNzA3MjY2NTM4LjMzOTg1MiwiZXhwIjoxNzA5ODU4NTM4LjMzOTg1MiwidXNlcl9pdHNjIjoic3BjaGFuYWUiLCJ1c2VyX3NjaG9vbF9sYWJlbCI6IlVTVCIsInBsYXRmb3JtIjoid2ViIn0.tjajHIHeBoVtGGrh1V1hAS0pvRi6Qe_MAA54LH3ndU4";
-const falseToken = "haha";
 
-// const userToken = new URL(location.href).searchParams.get('token')
-
-// For Testing only !!!!
-const userToken = new URL(location.href).searchParams.get('token')? new URL(location.href).searchParams.get('token') : testToken1;
+const userToken = new URL(location.href).searchParams.get('token')
 
 onMounted(async () => {
   userInfo.value = await getUserInfo(userToken);

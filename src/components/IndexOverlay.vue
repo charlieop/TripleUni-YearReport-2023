@@ -2,13 +2,13 @@
   <div class="wrapper" v-if="!hidePage">
     <div class="container">
       <div class="img-container">
-        <img src="@/assets/imgs/title.svg" alt="" />
-        <img src="@/assets/imgs/pointer.svg" class="pointer" alt="" />
+        <img src="https://i.boatonland.com/report2023/title.svg" alt="" />
+        <img src="https://i.boatonland.com/report2023/pointer.svg" class="pointer" alt="" />
       </div>
       <div class="img-container">
         <img :src="subtitles[subtitleIndex % 3]" alt="" />
-        <img src="@/assets/imgs/arrow.svg" class="arrow" alt="" />
-        <img src="@/assets/imgs/right.svg" class="right" alt="" />
+        <img src="https://i.boatonland.com/report2023/arrow.svg" class="arrow" alt="" />
+        <img src="https://i.boatonland.com/report2023/right.svg" class="right" alt="" />
       </div>
       <div class="btn-container">
         <div class="button" @click="start">查收我的报告</div>
@@ -25,16 +25,12 @@
 <script setup>
 import { onMounted, ref, defineProps } from "vue";
 
-import subtitle0 from "@/assets/imgs/subtitle_0.svg";
-import subtitle1 from "@/assets/imgs/subtitle_1.svg";
-import subtitle2 from "@/assets/imgs/subtitle_2.svg";
-
 const props = defineProps({
   loaded: Boolean,
 });
 
 const hidePage = ref(false);
-const subtitles = [subtitle0, subtitle1, subtitle2];
+const subtitles = ["https://i.boatonland.com/report2023/subtitle_0.svg", "https://i.boatonland.com/report2023/subtitle_1.svg", "https://i.boatonland.com/report2023/subtitle_2.svg"];
 const colors = ["#d85050", "#7b4bed", "#80c5d2"];
 let subtitleIndex = ref(0);
 onMounted(() => {
