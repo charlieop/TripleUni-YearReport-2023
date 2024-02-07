@@ -1,9 +1,9 @@
 <template>
   <div class="pages-container page6">
     <div class="page page6-1" style="color: whitesmoke">
-      <div class="image-outer">
+      <!-- <div class="image-outer">
         <img :src="imageUrl" v-if="imageUrl" class="rendered-image">
-      </div>
+      </div> -->
       <div class="frame-outer" @click="getImage" ref="frameArea">
 
         <div class="frame-bg"></div>
@@ -33,8 +33,8 @@
 
           <div style="display: flex; width: 100%; justify-content: space-between;">
             <div class="acheivements" v-for="item in displayed_acheivements" style="display: flex; flex-direction: column; justify-content: space-between;">
-              <pre style="font-size: 0.9rem;  white-space: pre-wrap; margin-bottom: 0.4rem; font-weight: 3rem; line-height: 1rem;">{{ item.slogan }}</pre>
-              <p style="font-size: 0.6rem; white-space: pre-wrap; line-height: 0.7rem;">{{ item.detail }}</p>
+              <pre style="font-size: 0.9rem;  white-space: pre-wrap; margin-bottom: 0.4rem; font-weight: 3rem; line-height: 1rem;">{{ item.title }}</pre>
+              <p style="font-size: 0.6rem; white-space: pre-wrap; line-height: 0.7rem;">{{ item.description }}</p>
             </div>
           </div>
 
@@ -76,14 +76,11 @@ const frameArea = ref(null)
 const showId = ref(true)
 
 const collage_nickname = ref(collageInfoRef.value.nickname[collageRef.value]);
-const title1 = ref(userInfoRef.value.title_1.replace('REPLACE', collage_nickname.value).replace(/「.*」/g, ''));
-const title2 = ref(userInfoRef.value.title_2.replace('REPLACE', collage_nickname.value).replace(/「.*」/g, '').replaceAll('！','!').slice(1));
+const title1 = ref(userInfoRef.value.title_1);
+const title2 = ref(userInfoRef.value.title_2.replaceAll('！','!').slice(1));
 
-const acheivements = ref([ {detail: "登陆时长\n"+userInfoRef.value.user_minute_count+"分钟"}, 
-  {detail: "发布树洞\n"+userInfoRef.value.user_post_count+"条"},
-  // {detail: "互动超过"+userInfoRef.value.user_view_post_count+"次"},
-  ])
-const displayed_acheivements = ref([])
+const acheivements = ref(userInfoRef.value.title_list)
+const displayed_acheivements = ref(acheivements.value.slice(0, 3))
 
 onMounted(() => {
   const observer = new IntersectionObserver(animate, {
@@ -97,68 +94,67 @@ onMounted(() => {
   });
   
 
-  if (userInfoRef.value.user_minute_count < 50) {
-    acheivements.value[0].slogan = collage_nickname.value + "纯路人"
-  } else if (userInfoRef.value.user_minute_count < 100) {
-    acheivements.value[0].slogan = "玩转\n" + collage_nickname.value
-  } else {
-    acheivements.value[0].slogan = "荣耀\n登顶"
-  }
+  // if (userInfoRef.value.user_minute_count < 50) {
+  //   acheivements.value[0].slogan = collage_nickname.value + "纯路人"
+  // } else if (userInfoRef.value.user_minute_count < 100) {
+  //   acheivements.value[0].slogan = "玩转\n" + collage_nickname.value
+  // } else {
+  //   acheivements.value[0].slogan = "荣耀\n登顶"
+  // }
 
-  if (userInfoRef.value.user_post_count < 10) {
-    acheivements.value[1].slogan = "沉默\n是金"
-  } else if (userInfoRef.value.user_post_count < 60) {
-    acheivements.value[1].slogan = "洞瘾\n大发"
-  } else {
-    acheivements.value[1].slogan = "话题\n制造机"
-  }
+  // if (userInfoRef.value.user_post_count < 10) {
+  //   acheivements.value[1].slogan = "沉默\n是金"
+  // } else if (userInfoRef.value.user_post_count < 60) {
+  //   acheivements.value[1].slogan = "洞瘾\n大发"
+  // } else {
+  //   acheivements.value[1].slogan = "话题\n制造机"
+  // }
 
-  if (userInfoRef.value.user_view_post_count > 50 && userInfoRef.value.user_view_post_count <= 100) {
-    acheivements.value.push({detail: "浏览树洞\n"+userInfoRef.value.user_view_post_count+"条", slogan: collage_nickname.value + "\n粉丝"})
-  } else if (userInfoRef.value.user_view_post_count > 100) {
-    acheivements.value.push({detail: "浏览树洞\n"+userInfoRef.value.user_view_post_count+"条", slogan: collage_nickname.value + "\n大咖"})
-  } 
+  // if (userInfoRef.value.user_view_post_count > 50 && userInfoRef.value.user_view_post_count <= 100) {
+  //   acheivements.value.push({detail: "浏览树洞\n"+userInfoRef.value.user_view_post_count+"条", slogan: collage_nickname.value + "\n粉丝"})
+  // } else if (userInfoRef.value.user_view_post_count > 100) {
+  //   acheivements.value.push({detail: "浏览树洞\n"+userInfoRef.value.user_view_post_count+"条", slogan: collage_nickname.value + "\n大咖"})
+  // } 
 
-  if (userInfoRef.value.user_stayup_percentage < 10) {
-    acheivements.value.push({detail: "熬夜比例\n"+Math.round(userInfoRef.value.user_stayup_percentage)+"%", slogan: "养生\n达人"})
-  } else if (userInfoRef.value.user_stayup_percentage > 70) {
-    acheivements.value.push({detail: "熬夜比例\n"+Math.round(userInfoRef.value.user_stayup_percentage)+"%", slogan: "夜猫子"})
-  }
+  // if (userInfoRef.value.user_stayup_percentage < 10) {
+  //   acheivements.value.push({detail: "熬夜比例\n"+Math.round(userInfoRef.value.user_stayup_percentage)+"%", slogan: "养生\n达人"})
+  // } else if (userInfoRef.value.user_stayup_percentage > 70) {
+  //   acheivements.value.push({detail: "熬夜比例\n"+Math.round(userInfoRef.value.user_stayup_percentage)+"%", slogan: "夜猫子"})
+  // }
 
-  if (userInfoRef.value.search_count > 10) {
-    acheivements.value.push({detail: "使用搜索\n"+Math.round(userInfoRef.value.user_stayup_percentage)+"次", slogan: "好奇\n宝宝"})
-  }
+  // if (userInfoRef.value.search_count > 10) {
+  //   acheivements.value.push({detail: "使用搜索\n"+Math.round(userInfoRef.value.user_stayup_percentage)+"次", slogan: "好奇\n宝宝"})
+  // }
 
-  if (userInfoRef.value.user_minute_count_web ) {
-    acheivements.value.push({detail: "使用过\nWeb端", slogan: "紧追\n潮流"})
-  }
+  // if (userInfoRef.value.user_minute_count_web ) {
+  //   acheivements.value.push({detail: "使用过\nWeb端", slogan: "紧追\n潮流"})
+  // }
 
-  if (userInfoRef.value.user_follow_count > 5 && userInfoRef.value.user_follow_count <= 10) {
-    acheivements.value.push({detail: "围观了\n"+userInfoRef.value.user_follow_count+"条", slogan: "小小\n收藏家"})
-  } else if (userInfoRef.value.user_follow_count > 10) {
-    acheivements.value.push({detail: "围观了\n"+userInfoRef.value.user_follow_count+"条", slogan: "超级\n收藏家"})
-  } 
+  // if (userInfoRef.value.user_follow_count > 5 && userInfoRef.value.user_follow_count <= 10) {
+  //   acheivements.value.push({detail: "围观了\n"+userInfoRef.value.user_follow_count+"条", slogan: "小小\n收藏家"})
+  // } else if (userInfoRef.value.user_follow_count > 10) {
+  //   acheivements.value.push({detail: "围观了\n"+userInfoRef.value.user_follow_count+"条", slogan: "超级\n收藏家"})
+  // } 
 
-  if (userInfoRef.value.user_vote_count > 10) {
-    acheivements.value.push({detail: "投票了\n"+userInfoRef.value.user_vote_count+"次", slogan: "投票\n爱好者"})
-  }
+  // if (userInfoRef.value.user_vote_count > 10) {
+  //   acheivements.value.push({detail: "投票了\n"+userInfoRef.value.user_vote_count+"次", slogan: "投票\n爱好者"})
+  // }
 
-  if (userInfoRef.value.user_pm_count > 10 && userInfoRef.value.user_pm_count <= 30) {
-    acheivements.value.push({detail: "发送私信\n"+userInfoRef.value.user_pm_count+"条", slogan: "谈天\n说地"})
-  } else if (userInfoRef.value.user_pm_count > 30) {
-    acheivements.value.push({detail: "发送私信\n"+userInfoRef.value.user_pm_count+"条", slogan: "社牛\n大爆发"})
-  }
+  // if (userInfoRef.value.user_pm_count > 10 && userInfoRef.value.user_pm_count <= 30) {
+  //   acheivements.value.push({detail: "发送私信\n"+userInfoRef.value.user_pm_count+"条", slogan: "谈天\n说地"})
+  // } else if (userInfoRef.value.user_pm_count > 30) {
+  //   acheivements.value.push({detail: "发送私信\n"+userInfoRef.value.user_pm_count+"条", slogan: "社牛\n大爆发"})
+  // }
 
-  if (userInfoRef.value.user_comment_count > 5 && userInfoRef.value.user_comment_count <= 10) {
-    acheivements.value.push({detail: "评论了\n"+userInfoRef.value.user_comment_count+"条", slogan: "真知\n灼见"})
-  } else if (userInfoRef.value.user_comment_count > 10) {
-    acheivements.value.push({detail: "评论了\n"+userInfoRef.value.user_comment_count+"条", slogan: "万众\n瞩目"})
-  } 
+  // if (userInfoRef.value.user_comment_count > 5 && userInfoRef.value.user_comment_count <= 10) {
+  //   acheivements.value.push({detail: "评论了\n"+userInfoRef.value.user_comment_count+"条", slogan: "真知\n灼见"})
+  // } else if (userInfoRef.value.user_comment_count > 10) {
+  //   acheivements.value.push({detail: "评论了\n"+userInfoRef.value.user_comment_count+"条", slogan: "万众\n瞩目"})
+  // } 
 
 
-  displayed_acheivements.value = randomSelection(3, acheivements.value)
+  // displayed_acheivements.value = randomSelection(3, acheivements.value)
   getImage();
-  // draw(true);
 
 });
 
@@ -301,13 +297,15 @@ function next() {
   align-self: flex-start;
   z-index: 2;
   /* background-image: url("@/assets/imgs/instax-frame.svg"); */
-  background-image: url("@/assets/imgs/instax-frame.svg");
+  /* background-image: url("@/assets/imgs/instax-frame.svg"); */
   padding: 15% 15% 36% 15%;
   color: black;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   position: relative;
+  border-radius: 20px;
+  background-color: white;
 }
 
 .frame-bg {
@@ -316,7 +314,7 @@ function next() {
   width: 90%;
   height: 80%;
   z-index: 1;
-  background-color: white;
+  /* background-color: white; */
   
 }
 
@@ -375,6 +373,8 @@ function next() {
   background-color: #f9f0d1;
   border-radius: 10px;
   padding: 0.5rem 0.3rem;
+  line-break: loose;
+  white-space: nowrap;
 }
 
 .buttons {

@@ -118,7 +118,7 @@ function hideDetail(e) {
   background-color: white;
   box-shadow: 0 0 0.3rem rgba(0, 0, 0, 0.5);
   border-radius: 0.75rem;
-  padding: 0.25rem 0.75rem;
+  padding: 0.2rem 0.7rem;
   display: grid;
   grid-template-rows: 1fr 1fr;
   font-size: var(--fs-300);
