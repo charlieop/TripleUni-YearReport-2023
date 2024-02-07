@@ -84,7 +84,14 @@
         userInfo.most_follow_post
       "
     >
-      <h2 class="hide transition">你发布的树洞中<br />那些「顶流」般的存在</h2>
+      <h2 class="hide transition">
+        你发布的树洞中<br />那些<img
+          src="@/assets/imgs/top.svg"
+          alt="top"
+          class="top"
+        />
+        般的存在
+      </h2>
       <div class="horizontal_scroller">
         <div class="card hide transition" v-if="userInfo.most_view_post">
           <p>
@@ -128,10 +135,28 @@
     >
       <p>你发布的帖子中</p>
       <p>频频出现:</p>
-      <div>
-        <span v-for="word in userInfo.user_most_post_word_list.slice(0, 3)">
-          {{ word }}</span
+      <div
+        class="common-words"
+        :style="
+          !(
+            userInfo.most_view_post ||
+            userInfo.most_comment_post ||
+            userInfo.most_follow_post
+          )
+            ? 'height: 20rem;--_size: 8rem;margin-bottom: 4rem;'
+            : ''
+        "
+      >
+        <div
+          class="sticker hide transition"
+          :class="'sticker' + i"
+          v-for="i in Array(
+            userInfo.user_most_post_word_list.slice(0, 4).length
+          ).keys()"
         >
+          <img :src="getStickerPath(i)" alt="" class="sticker-image" />
+          <p class="sticker-text">{{ userInfo.user_most_post_word_list[i] }}</p>
+        </div>
       </div>
       <p>它们是否是你许多纷飞思绪的源头呢？</p>
     </div>
@@ -172,7 +197,7 @@ onMounted(() => {
       });
     },
     {
-      rootMargin: "-45% 0px -45% 0px",
+      rootMargin: "-42% 0px -42% 0px",
       threshold: 0,
     }
   );
@@ -208,6 +233,11 @@ function animate(e) {
     }, timer);
     timer += 1000;
   });
+}
+
+let rootPath = new URL(window.location).pathname;
+function getStickerPath(i) {
+  return rootPath + "imgs/sticker" + i + ".png";
 }
 
 const collageInfoRef = toRef(props, "collageInfo");
@@ -260,13 +290,83 @@ const userInfoRef = toRef(props, "userInfo");
 
 .page4-2 {
   background: linear-gradient(#f2b823 0%, #96b255 55%, #57904d 95%);
-  padding-block: 4rem 0;
+  padding-block: 3rem 0;
 }
 
 .page4-2 h2 {
   font-size: var(--fs-500);
   margin-bottom: 1.5rem;
   padding-inline: var(--page-padding);
+}
+
+.top {
+  width: 2rem;
+  margin-right: 2rem;
+  transform: translate(1rem, 0.2rem) scale(1.7);
+  animation: top 5s ease-in-out infinite;
+}
+@keyframes top {
+  0% {
+    transform: translate(1rem) scale(1.6) rotate3d(0, 1, 0, -45deg);
+  }
+  50% {
+    transform: translate(1rem, 0.3rem) scale(2) rotate(-10deg);
+  }
+  100% {
+    transform: translate(1rem) scale(1.6) rotate3d(0, 1, 0, 45deg);
+  }
+}
+
+.common-words {
+  --_size: 6rem;
+  position: relative;
+  height: 6rem;
+  margin-bottom: 1rem;
+}
+
+.sticker {
+  position: absolute;
+  width: var(--_size, 6rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: all 1s ease-in-out;
+}
+.sticker0 {
+  top: 30%;
+  left: 25%;
+  transform: scale(1.3);
+}
+.sticker1 {
+  top: 10%;
+  left: -1rem;
+  transform: scale(1.15) rotate(-15deg);
+}
+.sticker2 {
+  right: 20%;
+  top: -2rem;
+  transform: scale(1.25) rotate(20deg);
+}
+.sticker3 {
+  bottom: 0rem;
+  right: -5%;
+  transform: scale(1.25) rotate(-10deg);
+}
+.sticker-image {
+  object-fit: cover;
+  object-position: center;
+  width: 100%;
+}
+
+.sticker-text {
+  position: absolute;
+  top: 39%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: var(--fs-300);
+  color: white;
+  text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
 }
 
 .horizontal_scroller {
@@ -276,7 +376,7 @@ const userInfoRef = toRef(props, "userInfo");
   gap: 1rem;
   overflow-x: scroll;
   scroll-snap-type: x mandatory;
-  padding-bottom: 1rem;
+  padding-bottom: 0.5rem;
 }
 .horizontal_scroller::before,
 .horizontal_scroller::after {
@@ -288,11 +388,11 @@ const userInfoRef = toRef(props, "userInfo");
 .card {
   scroll-snap-align: center;
   flex-shrink: 0;
-  width: 90%;
+  width: 95%;
   background-color: #ffffff39;
   border: 1px solid #ffffff;
   border-radius: 0.5rem;
-  padding: 3.5rem 1rem;
+  padding: 2.5rem 1rem;
   gap: 3rem;
   display: flex;
   flex-direction: column;
