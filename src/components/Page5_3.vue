@@ -141,7 +141,8 @@ function animate(e) {
 
 <style scoped>
 .page5_3 {
-  background: linear-gradient(180deg, #ffffff 0%, #00b9ff 100%);
+  color: #054169;
+  background: linear-gradient(180deg, #ffffff 0%, #add6f2 100%);
 }
 
 .title {
@@ -171,6 +172,7 @@ function animate(e) {
 }
 
 .subtitle {
+  color: rgb(234, 114, 2);
   font-size: var(--fs-500);
   font-weight: 900;
   text-align: center;

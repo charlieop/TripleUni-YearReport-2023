@@ -1,5 +1,5 @@
 <template>
-  <div class="pages-container" :style="disableScroll">
+  <div class="pages-container page1" :style="disableScroll">
     <div class="page page1-1">
       <div class="text-area hide">
         <p>{{ collageInfo.creationTime[collage] }}</p>
@@ -172,6 +172,10 @@ function next() {
 </script>
 
 <style scoped>
+.page1 {
+  color: #466066;
+}
+
 .arrow {
   display: block;
   margin: 0.2rem auto;

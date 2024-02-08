@@ -200,6 +200,10 @@ function next() {
 </script>
 
 <style scoped>
+.page3 {
+  color: #623366;
+}
+
 .pages-container {
   background: linear-gradient(
     179.69deg,

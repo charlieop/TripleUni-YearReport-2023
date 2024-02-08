@@ -78,6 +78,8 @@ function animate(e) {
 
 <style scoped>
 .page5_1 {
+  color: #054302;
+
   background: linear-gradient(180deg, #57904d 5%, #008bcd 40%, #00b9ff 95%);
   background: linear-gradient(180deg, #57904d 5%, #efa717 95%);
 }

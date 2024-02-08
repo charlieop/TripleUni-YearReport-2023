@@ -418,6 +418,10 @@ function animate(e) {
 </script>
 
 <style scoped>
+.page2 {
+  color: #3e4366;
+}
+
 .header {
   font-size: var(--fs-500);
   margin-top: 0.5rem;

@@ -1,5 +1,5 @@
 <template>
-  <div class="pages-container page4-1">
+  <div class="pages-container page4-1 page4">
     <div class="group">
       <p>2023年</p>
       <p>
@@ -245,6 +245,10 @@ const userInfoRef = toRef(props, "userInfo");
 </script>
 
 <style scoped>
+.page4 {
+  color: #054302;
+}
+
 .pages-container {
   overflow: visible;
 }
@@ -334,12 +338,12 @@ const userInfoRef = toRef(props, "userInfo");
 }
 .sticker0 {
   top: 30%;
-  left: 25%;
+  left: 30%;
   transform: scale(1.3);
 }
 .sticker1 {
   top: 10%;
-  left: -1rem;
+  left: 0rem;
   transform: scale(1.15) rotate(-15deg);
 }
 .sticker2 {

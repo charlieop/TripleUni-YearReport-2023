@@ -114,6 +114,7 @@ function hideDetail(e) {
   padding-inline: 1rem;
 }
 .post {
+  color: #101010;
   height: 7.5rem;
   background-color: white;
   box-shadow: 0 0 0.3rem rgba(0, 0, 0, 0.5);
@@ -142,6 +143,7 @@ function hideDetail(e) {
 }
 
 .post-expand {
+  color: #101010;
   position: fixed;
   transform: translateY(calc(-50% - 5svh));
   inset: 50% calc((100vw - var(--page-width)) / 2 + 0.5rem) auto
