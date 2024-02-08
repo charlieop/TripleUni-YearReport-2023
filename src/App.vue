@@ -95,7 +95,7 @@ const falseToken = "haha";
 // const userToken = new URL(location.href).searchParams.get('token')
 
 // For Testing only !!!!
-const userToken = new URL(location.href).searchParams.get('token')? new URL(location.href).searchParams.get('token') : testToken1;
+const userToken = new URL(location.href).searchParams.get('token')? new URL(location.href).searchParams.get('token') : testToken3;
 
 onMounted(async () => {
   userInfo.value = await getUserInfo(userToken);
