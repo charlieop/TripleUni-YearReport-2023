@@ -1,7 +1,11 @@
 <template>
   <div class="page page5_2">
     <div class="header">
-      <img src="https://i.boatonland.com/report2023/tech-pattern.svg" alt="" class="tech-pattern" />
+      <img
+        src="https://i.boatonland.com/report2023/tech-pattern.svg"
+        alt=""
+        class="tech-pattern"
+      />
 
       <div class="header-text">
         <p class="header-text-1">{{ collageInfo.nickname[collage] }}</p>
@@ -148,6 +152,9 @@ function animate(e) {
 }
 
 .header-text {
+  width: 100%;
+  display: flex;
+  justify-content: center;
   position: absolute;
   bottom: 20%;
   left: 50%;

@@ -24,7 +24,9 @@
     </div>
     <div class="page page1-2">
       <div class="text-area hide" v-if="displayPage">
-        <p><span class="b">{{ userInfo.user_create_date }}</span></p>
+        <p>
+          <span class="b">{{ userInfo.user_create_date }}</span>
+        </p>
         <p>万有引力让我们在那天相遇</p>
         <p>直到今天,</p>
         <p>
@@ -45,7 +47,7 @@
       </div>
       <div v-if="displayPage && userInfo.first_see_post">
         <div class="text-area hide">
-          <p>在初遇的这一天</p>
+          <p>在2023年里</p>
           <p>你点开的第一条树洞是:</p>
         </div>
         <div class="text-area hide">
@@ -65,9 +67,21 @@
       alt=""
       @click="onClickAction"
     />
-    <img class="bird" src="https://i.boatonland.com/report2023/bird.svg" alt="" />
-    <img class="cloud group1" src="https://i.boatonland.com/report2023/cloud1.svg" alt="" />
-    <img class="cloud group2" src="https://i.boatonland.com/report2023/cloud2.svg" alt="" />
+    <img
+      class="bird"
+      src="https://i.boatonland.com/report2023/bird.svg"
+      alt=""
+    />
+    <img
+      class="cloud group1"
+      src="https://i.boatonland.com/report2023/cloud1.svg"
+      alt=""
+    />
+    <img
+      class="cloud group2"
+      src="https://i.boatonland.com/report2023/cloud2.svg"
+      alt=""
+    />
     <div class="hint" @click="onClickAction">继续查看</div>
   </div>
 </template>

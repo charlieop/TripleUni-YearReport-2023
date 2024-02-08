@@ -57,8 +57,6 @@
 </template>
 
 <script setup>
-import Test from "@/components/Test.vue";
-
 import IndexOverlay from "@/components/IndexOverlay.vue";
 import Page1 from "@/components/Page1.vue";
 import Page2 from "@/components/Page2.vue";
@@ -84,8 +82,7 @@ let loaded = computed(() => {
   return userInfo.value.data != undefined;
 });
 
-
-const userToken = new URL(location.href).searchParams.get('token')
+const userToken = new URL(location.href).searchParams.get("token");
 
 onMounted(async () => {
   userInfo.value = await getUserInfo(userToken);

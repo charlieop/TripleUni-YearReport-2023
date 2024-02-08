@@ -23,7 +23,9 @@
         <div v-else>
           <p>
             你有
-            <span class="b">{{ Math.ceil(userInfo.user_date_count / 3.65) }}%</span>
+            <span class="b"
+              >{{ Math.ceil(userInfo.user_date_count / 3.65) }}%</span
+            >
             的日子流连于{{ collageInfo.nickname[collage] }}
           </p>
           <p>每一次访问</p>
@@ -44,7 +46,9 @@
           </p>
         </div>
         <p v-else>
-          超过了<span class="b">{{ userInfo.user_minute_count_percentage }}% </span>的{{ collageInfo.nickname[collage] }}用户
+          超过了<span class="b"
+            >{{ userInfo.user_minute_count_percentage }}% </span
+          >的{{ collageInfo.nickname[collage] }}用户
         </p>
       </div>
       <div class="text-area hide">
@@ -66,7 +70,11 @@
           {{ word }}
         </div>
       </div>
-      <img class="book hide transition" src="https://i.boatonland.com/report2023/enchanted-book.svg" alt="" />
+      <img
+        class="book hide transition"
+        src="https://i.boatonland.com/report2023/enchanted-book.svg"
+        alt=""
+      />
     </div>
     <div class="page page2-2">
       <div class="text-area hide">
@@ -106,8 +114,13 @@
         </template>
       </div>
       <div class="text-area hide">
-        <p><span :style="'color:' + my_distribution_color">你</span>和<span :style="'color:' + average_distribution_color">大家</span>的使用时间分布是:</p>
-        <Line class="lineChart" :options="options" :data="data_average"/>
+        <p>
+          <span :style="'color:' + my_distribution_color">你</span>和<span
+            :style="'color:' + average_distribution_color"
+            >大家</span
+          >的使用时间分布是:
+        </p>
+        <Line class="lineChart" :options="options" :data="data_average" />
       </div>
       <!-- <div class="text-area hide">
         <p>你的使用时间分布是:</p>
@@ -163,38 +176,6 @@
         <p>实在是太不可思议了</p>
       </div>
     </div>
-    <!-- <div class="page page2-4">
-      <div class="text-area hide">
-        <p class="header b">
-          <span>
-            {{ parseInt(userInfo.user_view_longest_date.split("-")[1]) }}月{{
-              parseInt(userInfo.user_view_longest_date.split("-")[2])
-            }}日
-          </span>
-        </p>
-        <p>
-          那天居然有
-          <span class="b">{{ userInfo.user_view_longest_minute_count }}</span>
-          分钟在浏览{{ collageInfo.nickname[collage] }}
-        </p>
-      </div>
-      <div class="text-area hide">
-        <p>这一天是你这一年中</p>
-        <p>
-          陪伴{{ collageInfo.nickname[collage] }}时间
-          <span class="b special">最长</span> 的一天
-        </p>
-      </div>
-      <div class="text-area hide">
-        <p>陪完了{{ collageInfo.nickname[collage] }}</p>
-        <p>也不要忘了家人与朋友们哦</p>
-      </div>
-      <div class="emoji hide transition">🥹</div>
-      <div class="emoji hide transition">🥹</div>
-      <div class="emoji hide transition">🥹</div>
-
-      <div class="next hide" @click="next">继续查看</div>
-    </div> -->
   </div>
 </template>
 
@@ -202,8 +183,17 @@
 import PostComponnet from "@/components/PostComponnet.vue";
 
 import { toRef, computed, onMounted } from "vue";
-import { Line } from 'vue-chartjs'
-import { Chart as ChartJS, Title, Tooltip, Legend, LinearScale, LineElement, PointElement, CategoryScale } from 'chart.js'
+import { Line } from "vue-chartjs";
+import {
+  Chart as ChartJS,
+  Title,
+  Tooltip,
+  Legend,
+  LinearScale,
+  LineElement,
+  PointElement,
+  CategoryScale,
+} from "chart.js";
 
 ChartJS.register(
   CategoryScale,
@@ -286,71 +276,120 @@ function next() {
   });
 }
 
-const my_distribution_color = '#2f78ed'
-const average_distribution_color = '#a473d1'
+const my_distribution_color = "#2f78ed";
+const average_distribution_color = "#a473d1";
 
 const options = {
-    responsive: true,
-    backgroundColor: '#D8D8D8',
-    elements:{
-      point:{
-        radius: 0,
-      }
+  responsive: true,
+  backgroundColor: "#D8D8D8",
+  elements: {
+    point: {
+      radius: 0,
     },
+  },
+  legend: {
+    display: false,
+  },
+  plugins: {
     legend: {
-      display: false
+      display: false,
     },
-    plugins: {
-      legend: {
-        display: false
-      },
-      title: {
-        display: false,
-      },
-      customCanvasBackgroundColor: {
-        color: 'lightGreen',
-      }
+    title: {
+      display: false,
     },
-    layout: {
-      padding:{
-        bottom: 7,
-      }
+    customCanvasBackgroundColor: {
+      color: "lightGreen",
     },
-    scales: {
-      y: {
-        display: false
-      }
+  },
+  layout: {
+    padding: {
+      bottom: 7,
     },
-    aspectRatio: 1.2,
-  };
+  },
+  scales: {
+    y: {
+      display: false,
+    },
+  },
+  aspectRatio: 1.2,
+};
 
 const data_average = {
-  labels: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23'],
+  labels: [
+    "0",
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "10",
+    "11",
+    "12",
+    "13",
+    "14",
+    "15",
+    "16",
+    "17",
+    "18",
+    "19",
+    "20",
+    "21",
+    "22",
+    "23",
+  ],
   datasets: [
-  {
-      label: '你的时间分布',
+    {
+      label: "你的时间分布",
       data: userInfoRef.value.user_hour_distribution,
       borderColor: my_distribution_color,
     },
     {
-      label: '平均时间分布',
+      label: "平均时间分布",
       data: userInfoRef.value.total_hour_distribution,
       borderColor: average_distribution_color,
     },
-    
-  ]
+  ],
 };
 
 const data_user = {
-  labels: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23'],
+  labels: [
+    "0",
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "10",
+    "11",
+    "12",
+    "13",
+    "14",
+    "15",
+    "16",
+    "17",
+    "18",
+    "19",
+    "20",
+    "21",
+    "22",
+    "23",
+  ],
   datasets: [
     {
-      label: '你的时间分布',
+      label: "你的时间分布",
       data: userInfoRef.value.user_hour_distribution,
-      borderColor: '#2f78ed',
-      backgroundColor: 'rgba(153,153,153, 0.5)',
+      borderColor: "#2f78ed",
+      backgroundColor: "rgba(153,153,153, 0.5)",
     },
-  ]
+  ],
 };
 
 onMounted(() => {
@@ -379,71 +418,6 @@ function animate(e) {
 </script>
 
 <style scoped>
-.emoji {
-  position: absolute;
-  font-size: 5em;
-}
-
-.emoji::after {
-  content: "🫶";
-  position: absolute;
-  font-size: var(--fs-900);
-}
-
-.emoji:nth-child(1 of .emoji) {
-  top: 40%;
-  left: 15%;
-}
-
-.emoji:nth-child(1 of .emoji)::after {
-  bottom: 20%;
-  left: 50%;
-  animation: hand1 1.5s linear infinite alternate-reverse;
-}
-
-.emoji:nth-child(2 of .emoji) {
-  top: 40%;
-  right: 15%;
-}
-
-.emoji:nth-child(2 of .emoji)::after {
-  bottom: 20%;
-  left: 50%;
-  animation: hand1 1.5s linear infinite alternate;
-}
-
-.emoji:nth-child(3 of .emoji) {
-  top: 57%;
-  right: 50%;
-  transform: translateX(50%);
-}
-
-.emoji:nth-child(3 of .emoji)::after {
-  bottom: -3%;
-  left: 50%;
-  animation: hand2 1.5s linear infinite;
-}
-
-@keyframes hand1 {
-  0% {
-    transform: translateX(-50%) rotate(60deg) translate(0, 2.75rem) rotate(-60deg);
-  }
-
-  100% {
-    transform: translateX(-50%) rotate(-60deg) translate(0, 2.75rem) rotate(60deg);
-  }
-}
-
-@keyframes hand2 {
-  0% {
-    transform: rotate(0deg) translate(0, 0.5rem) rotate(-0deg);
-  }
-
-  100% {
-    transform: rotate(360deg) translate(0, 0.5rem) rotate(-360deg);
-  }
-}
-
 .header {
   font-size: var(--fs-500);
   margin-top: 0.5rem;
@@ -534,7 +508,7 @@ function animate(e) {
   }
 }
 
-.lineChart{
+.lineChart {
   margin-top: 20px;
 }
 
