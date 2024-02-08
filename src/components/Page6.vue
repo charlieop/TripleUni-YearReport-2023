@@ -1,108 +1,42 @@
 <template>
   <div class="pages-container page6">
     <div class="page page6-1" style="color: whitesmoke">
-      <!-- <div class="image-outer">
+      <div class="image-outer">
         <img :src="imageUrl" v-if="imageUrl" class="rendered-image">
-      </div> -->
+      </div>
       <div class="frame-outer" @click="getImage" ref="frameArea">
         <div class="frame-bg"></div>
         <div class="frame-inner">
-          <div
-            style="
-              display: flex;
-              justify-content: space-between;
-              margin-bottom: 1.3rem;
-            "
-          >
-            <p style="font-weight: 700">2023年</p>
-            <div style="display: flex" v-if="showId">
-              <img
-                class="avatar"
-                :src="
-                  'https://i.boatonland.com/avatar/' +
-                  userInfoRef.user_avatar +
-                  '.svg?v=' +
-                  timeStamp
-                "
-                crossOrigin="anonymous"
-              />
+          <div style="display: flex; justify-content: space-between; margin-bottom: 2.9rem;">
+            
+            <div style="display: flex; justify-content: center; align-items: center;  width: 100%;" v-if="showId">
+              <img class="avatar"
+                :src="'https://i.boatonland.com/avatar/' + userInfoRef.user_avatar + '.svg?v=' + timeStamp"
+                crossOrigin="anonymous" />
               <!-- <img class="avatar" src="https://i.boatonland.com/avatar/party-12.svg"/> -->
               <p>{{ userInfoRef.user_serial }}</p>
             </div>
-            <div v-else></div>
+            <div style="height: 1.74rem" v-else></div>
           </div>
 
-          <div
-            style="
-              display: flex;
-              flex-direction: column;
-              font-size: var(--fs-primary);
-            "
-          >
+          <div style="display: flex; flex-direction: column;  padding: 0.75rem 5% 0.7rem 15%;">
             <p class="accent-text">{{ title1 }}</p>
-            <div style="align-self: flex-end">
-              <p
-                style="
-                  color: black;
-                  display: inline;
-                  font-size: 1rem;
-                  font-weight: 500;
-                "
-              >
-                在
-              </p>
-              <p class="accent-text" style="display: inline">{{ title2 }}</p>
+
+            <p style="display: inline;  white-space: pre; line-height: 1.2rem; font-weight: 600; font-size: 75%;">{{ title2 }}</p>
+            
+          </div>
+
+          <div style="position: absolute; bottom: 26.5%; left:0; display: flex; flex-direction: column; align-items: center; width: 100%;">
+          <p style="font-size:medium; text-align: center; margin: 0 0 1.4rem 0; font-weight:600">{{ collage_nickname + '恭喜你达成了以下成就' }}</p>
+
+          <div style="display: flex; width: 70%; justify-content: space-between;">
+            <div class="acheivements" v-for="item in displayed_acheivements" style="display: flex; flex-direction: column; justify-content: space-between;">
+              <pre style="font-size: 0.9rem;  white-space: pre-wrap; margin-bottom: 0.4rem; font-weight: 3rem; line-height: 1rem;">{{ item.title }}</pre>
+              <p style="font-size: 0.6rem; white-space: pre-wrap; line-height: 0.7rem;">{{ item.description }}</p>
             </div>
           </div>
 
-          <p style="font-size: medium; text-align: center; margin: 1rem 0">
-            {{ collage_nickname + "恭喜你达成了以下成就:" }}
-          </p>
-
-          <div
-            style="display: flex; width: 100%; justify-content: space-between"
-          >
-            <div
-              class="acheivements"
-              v-for="item in displayed_acheivements"
-              style="
-                display: flex;
-                flex-direction: column;
-                justify-content: space-between;
-              "
-            >
-              <pre
-                style="
-                  font-size: 0.9rem;
-                  white-space: pre-wrap;
-                  margin-bottom: 0.4rem;
-                  font-weight: 3rem;
-                  line-height: 1rem;
-                "
-                >{{ item.title }}</pre
-              >
-              <p
-                style="
-                  font-size: 0.6rem;
-                  white-space: pre-wrap;
-                  line-height: 0.7rem;
-                "
-              >
-                {{ item.description }}
-              </p>
-            </div>
           </div>
-
-          <p
-            style="
-              position: absolute;
-              font-size: 0.7rem;
-              bottom: 7.2rem;
-              right: 3rem;
-            "
-          >
-            Triple Uni
-          </p>
         </div>
       </div>
 
@@ -112,17 +46,11 @@
         &uarr; 长按保存分享
       </p>
 
-      <div style="display: flex; justify-content: space-between">
-        <button
-          @click="
-            showId = !showId;
-            getImage();
-          "
-          class="buttons"
-        >
-          {{ showId ? "隐藏ID" : "显示ID" }}
-        </button>
-        <button @click="changeAcheimentsIdx()" class="buttons">切换成就</button>
+      <p style="font-size:var(--fs-300); text-align: center; margin-top: 5%; z-index: 5;"> &uarr; 长按保存分享</p>
+
+      <div style="display: flex; justify-content: space-between; margin: 0 6%; ">
+        <button @click="showId = !showId; getImage();" class="buttons" style="background-color: #F8EEAB;">{{ showId ? '隐藏ID' : '显示ID' }}</button>
+        <button @click="changeAcheimentsIdx()" class="buttons" style="background-color: #D8C9F5;" :disabled="acheivements.length <= 3"> 切换成就 </button>
       </div>
     </div>
   </div>
@@ -130,7 +58,7 @@
 
 <script setup>
 import { toRef, computed, onMounted, ref } from "vue";
-import { toPng } from "html-to-image";
+import { toPng } from 'html-to-image';
 
 const props = defineProps({
   collageInfo: Object,
@@ -150,7 +78,7 @@ const showId = ref(true);
 
 const collage_nickname = ref(collageInfoRef.value.nickname[collageRef.value]);
 const title1 = ref(userInfoRef.value.title_1);
-const title2 = ref(userInfoRef.value.title_2.replaceAll("！", "!").slice(1));
+const title2 = ref(userInfoRef.value.title_2.replaceAll('！','!'));
 
 const acheivements = ref(userInfoRef.value.title_list);
 const displayed_acheivements = ref(acheivements.value.slice(0, 3));
@@ -165,66 +93,7 @@ onMounted(() => {
   pages.forEach((page) => {
     observer.observe(page);
   });
-
-  // if (userInfoRef.value.user_minute_count < 50) {
-  //   acheivements.value[0].slogan = collage_nickname.value + "纯路人"
-  // } else if (userInfoRef.value.user_minute_count < 100) {
-  //   acheivements.value[0].slogan = "玩转\n" + collage_nickname.value
-  // } else {
-  //   acheivements.value[0].slogan = "荣耀\n登顶"
-  // }
-
-  // if (userInfoRef.value.user_post_count < 10) {
-  //   acheivements.value[1].slogan = "沉默\n是金"
-  // } else if (userInfoRef.value.user_post_count < 60) {
-  //   acheivements.value[1].slogan = "洞瘾\n大发"
-  // } else {
-  //   acheivements.value[1].slogan = "话题\n制造机"
-  // }
-
-  // if (userInfoRef.value.user_view_post_count > 50 && userInfoRef.value.user_view_post_count <= 100) {
-  //   acheivements.value.push({detail: "浏览树洞\n"+userInfoRef.value.user_view_post_count+"条", slogan: collage_nickname.value + "\n粉丝"})
-  // } else if (userInfoRef.value.user_view_post_count > 100) {
-  //   acheivements.value.push({detail: "浏览树洞\n"+userInfoRef.value.user_view_post_count+"条", slogan: collage_nickname.value + "\n大咖"})
-  // }
-
-  // if (userInfoRef.value.user_stayup_percentage < 10) {
-  //   acheivements.value.push({detail: "熬夜比例\n"+Math.round(userInfoRef.value.user_stayup_percentage)+"%", slogan: "养生\n达人"})
-  // } else if (userInfoRef.value.user_stayup_percentage > 70) {
-  //   acheivements.value.push({detail: "熬夜比例\n"+Math.round(userInfoRef.value.user_stayup_percentage)+"%", slogan: "夜猫子"})
-  // }
-
-  // if (userInfoRef.value.search_count > 10) {
-  //   acheivements.value.push({detail: "使用搜索\n"+Math.round(userInfoRef.value.user_stayup_percentage)+"次", slogan: "好奇\n宝宝"})
-  // }
-
-  // if (userInfoRef.value.user_minute_count_web ) {
-  //   acheivements.value.push({detail: "使用过\nWeb端", slogan: "紧追\n潮流"})
-  // }
-
-  // if (userInfoRef.value.user_follow_count > 5 && userInfoRef.value.user_follow_count <= 10) {
-  //   acheivements.value.push({detail: "围观了\n"+userInfoRef.value.user_follow_count+"条", slogan: "小小\n收藏家"})
-  // } else if (userInfoRef.value.user_follow_count > 10) {
-  //   acheivements.value.push({detail: "围观了\n"+userInfoRef.value.user_follow_count+"条", slogan: "超级\n收藏家"})
-  // }
-
-  // if (userInfoRef.value.user_vote_count > 10) {
-  //   acheivements.value.push({detail: "投票了\n"+userInfoRef.value.user_vote_count+"次", slogan: "投票\n爱好者"})
-  // }
-
-  // if (userInfoRef.value.user_pm_count > 10 && userInfoRef.value.user_pm_count <= 30) {
-  //   acheivements.value.push({detail: "发送私信\n"+userInfoRef.value.user_pm_count+"条", slogan: "谈天\n说地"})
-  // } else if (userInfoRef.value.user_pm_count > 30) {
-  //   acheivements.value.push({detail: "发送私信\n"+userInfoRef.value.user_pm_count+"条", slogan: "社牛\n大爆发"})
-  // }
-
-  // if (userInfoRef.value.user_comment_count > 5 && userInfoRef.value.user_comment_count <= 10) {
-  //   acheivements.value.push({detail: "评论了\n"+userInfoRef.value.user_comment_count+"条", slogan: "真知\n灼见"})
-  // } else if (userInfoRef.value.user_comment_count > 10) {
-  //   acheivements.value.push({detail: "评论了\n"+userInfoRef.value.user_comment_count+"条", slogan: "万众\n瞩目"})
-  // }
-
-  // displayed_acheivements.value = randomSelection(3, acheivements.value)
+  
   getImage();
 });
 
@@ -361,7 +230,9 @@ function next() {
 
 <style scoped>
 .pages-container {
-  background: linear-gradient(180deg, #add6f2 10%, #d3f4ff 90%);
+  background: #ADD6F2; 
+  /* linear-gradient(180deg, #00B9FF 10%, #D3F4FF 90%); */
+  /* padding-bottom: 7rem; */
 }
 
 #canvas-container {
@@ -373,10 +244,10 @@ function next() {
 }
 
 .frame-outer {
-  margin-top: 5vw;
+  margin-top: 1vw;
   position: relative;
   width: 100%;
-  aspect-ratio: 1 / 1.57;
+  aspect-ratio: 1 / 1.8;
   overflow: hidden;
   display: flex;
   justify-content: center;
@@ -387,19 +258,21 @@ function next() {
 .frame-inner {
   /* background-color: white; */
   width: 100%;
-  aspect-ratio: 1 / 1.37;
+  aspect-ratio: 1 / 2;
   align-self: flex-start;
   z-index: 2;
   /* background-image: url("@/assets/imgs/instax-frame.svg"); */
-  /* background-image: url("@/assets/imgs/instax-frame.svg"); */
-  padding: 15% 15% 36% 15%;
+  background-image: url("@/assets/imgs/page6-bg.png");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  padding: 41% 15% 36% 15%;
   color: black;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   position: relative;
   border-radius: 20px;
-  background-color: white;
+  /* background-color: white; */
 }
 
 .frame-bg {
@@ -420,12 +293,15 @@ function next() {
 
 .image-outer {
   /* margin-top: 2rem; */
-  width: 100%;
-  margin-top: 1.5rem;
+  width: 92%;
+  margin-left: 4%;
+  margin-top: 4% ;
   display: flex;
   align-items: flex-start;
   justify-content: center;
   position: absolute;
+  aspect-ratio: 1 / 1.8;
+  overflow-y: hidden;
   top: 0;
   left: 0;
   z-index: 5;
@@ -438,7 +314,7 @@ function next() {
 }
 
 .avatar {
-  width: 1.5rem;
+  width: 1.3rem;
   margin-right: 0.3rem;
   aspect-ratio: 1;
 }
@@ -454,20 +330,23 @@ function next() {
   /* -webkit-background-clip: text;
   -webkit-text-fill-color: transparent; */
   /* color: linear-gradient(180deg, #00B9FF 10%, #D3F4FF 90%); */
-  font-weight: 800;
+  font-weight: 900;
   /* text-decoration: underline; */
-  font-size: 1.3rem;
+  font-size: 78%;
+  margin: 0.2rem 0;
 }
 
 .acheivements {
   text-align: center;
   width: 30%;
-  border: #ffb235 1px solid;
-  background-color: #f9f0d1;
+  /* border: #ffb235 1px solid; */
+  /* background-color: #f9f0d1; */
   border-radius: 10px;
-  padding: 0.5rem 0.3rem;
+  padding: 0.2rem 0.5rem;
   line-break: loose;
   white-space: nowrap;
+  position: relative;
+  height: 2.5rem;
 }
 
 .buttons {
@@ -475,14 +354,14 @@ function next() {
   margin: 1.7rem 0;
   inset: auto 10% 10% 10%;
   text-align: center;
-  padding: 0.8rem 0;
+  padding: 0.5rem 0;
   background: #fff;
   color: #000;
-  font-size: var(--fs-primary);
+  font-size: 1rem;
   font-weight: bold;
   cursor: pointer;
-  border-radius: 10px;
-  box-shadow: 0 0 0.3rem rgba(0, 0, 0, 0.5);
+  border-radius: 20px;
+  box-shadow: 0 0 0.1rem rgba(0, 0, 0, 0.5);
   transition: all 0.3s ease-in-out;
   width: 45%;
 }
@@ -495,5 +374,10 @@ function next() {
 .buttons:active {
   filter: brightness(0.6);
   transform: scale(0.95);
+}
+
+.buttons:disabled {
+  filter: brightness(0.6);
+  transform: scale(1);
 }
 </style>
