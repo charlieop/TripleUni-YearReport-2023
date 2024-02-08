@@ -19,14 +19,14 @@
             <div style="height: 1.74rem" v-else></div>
           </div>
 
-          <div style="display: flex; flex-direction: column;  padding: 0.75rem 5% 0.7rem 15%;">
+          <div style="display: flex; flex-direction: column;  padding: 2% 5% 0.7rem 15%;">
             <p class="accent-text">{{ title1 }}</p>
 
             <p style="display: inline;  white-space: pre; line-height: 1.2rem; font-weight: 600; font-size: 75%;">{{ title2 }}</p>
             
           </div>
 
-          <div style="position: absolute; bottom: 26.5%; left:0; display: flex; flex-direction: column; align-items: center; width: 100%;">
+          <div style="position: absolute; bottom: 16.3%; left:0; display: flex; flex-direction: column; align-items: center; width: 100%;">
           <p style="font-size:medium; text-align: center; margin: 0 0 1.4rem 0; font-weight:600">{{ collage_nickname + '恭喜你达成了以下成就' }}</p>
 
           <div style="display: flex; width: 70%; justify-content: space-between;">
@@ -40,13 +40,7 @@
         </div>
       </div>
 
-      <p
-        style="font-size: var(--fs-300); text-align: center; margin-top: 0.7rem"
-      >
-        &uarr; 长按保存分享
-      </p>
-
-      <p style="font-size:var(--fs-300); text-align: center; margin-top: 5%; z-index: 5;"> &uarr; 长按保存分享</p>
+      <p style="font-size:var(--fs-300); text-align: center; margin-top: 3%; z-index: 5;"> &uarr; 长按保存分享</p>
 
       <div style="display: flex; justify-content: space-between; margin: 0 6%; ">
         <button @click="showId = !showId; getImage();" class="buttons" style="background-color: #F8EEAB;">{{ showId ? '隐藏ID' : '显示ID' }}</button>
@@ -258,11 +252,11 @@ function next() {
 .frame-inner {
   /* background-color: white; */
   width: 100%;
-  aspect-ratio: 1 / 2;
+  aspect-ratio: 4 / 7;
   align-self: flex-start;
   z-index: 2;
   /* background-image: url("@/assets/imgs/instax-frame.svg"); */
-  background-image: url("@/assets/imgs/page6-bg.png");
+  background-image: url("https://i.boatonland.com/report2023/canvas2.png");
   background-repeat: no-repeat;
   background-size: 100% 100%;
   padding: 41% 15% 36% 15%;
@@ -293,8 +287,8 @@ function next() {
 
 .image-outer {
   /* margin-top: 2rem; */
-  width: 92%;
-  margin-left: 4%;
+  width: 94%;
+  margin-left: 3%;
   margin-top: 4% ;
   display: flex;
   align-items: flex-start;
@@ -342,7 +336,7 @@ function next() {
   /* border: #ffb235 1px solid; */
   /* background-color: #f9f0d1; */
   border-radius: 10px;
-  padding: 0.2rem 0.5rem;
+  padding: 0.2rem 0.3rem;
   line-break: loose;
   white-space: nowrap;
   position: relative;
@@ -351,10 +345,10 @@ function next() {
 
 .buttons {
   border: none;
-  margin: 1.7rem 0;
+  margin: 1rem 0;
   inset: auto 10% 10% 10%;
   text-align: center;
-  padding: 0.5rem 0;
+  padding: 0.6rem 0;
   background: #fff;
   color: #000;
   font-size: 1rem;
