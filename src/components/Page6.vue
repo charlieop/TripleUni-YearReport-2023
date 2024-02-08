@@ -1,7 +1,7 @@
 <template>
   <div class="pages-container page6">
     <div class="page page6-1" style="color: whitesmoke">
-      <div class="image-outer">
+      <div class="image-outer" style="opacity: 0;">
         <img :src="imageUrl" v-if="imageUrl" class="rendered-image">
       </div>
       <div class="frame-outer" @click="getImage" ref="frameArea">
@@ -19,7 +19,7 @@
             <div style="height: 1.76rem" v-else></div>
           </div>
 
-          <div style="display: flex; flex-direction: column;  padding: 3% 5% 0.7rem 15%;">
+          <div style="display: flex; flex-direction: column;  padding: 4.5% 5% 0.7rem 15%;">
             <p class="accent-text">{{ title1 }}</p>
 
             <p style="display: inline;  white-space: pre; line-height: 1.2rem; font-weight: 600; font-size: 75%;">{{ title2 }}</p>
@@ -240,8 +240,9 @@ function next() {
 .frame-outer {
   margin-top: 1vw;
   position: relative;
-  width: 100%;
-  aspect-ratio: 1 / 1.8;
+  width: 110%;
+  margin-left: -5%;
+  aspect-ratio: 4 / 7;
   overflow: hidden;
   display: flex;
   justify-content: center;
@@ -265,7 +266,7 @@ function next() {
   display: flex;
   flex-direction: column;
   position: relative;
-  border-radius: 10px;
+  /* border-radius: 10px; */
   /* background-color: white; */
 }
 
