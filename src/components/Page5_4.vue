@@ -65,7 +65,7 @@ onMounted(() => {
   });
   const achiObserver = new IntersectionObserver(showAchievement, {
     rootMargin: "0px 0px -15% 0px",
-    threshold: 0.8,
+    threshold: 0,
   });
   const achievements = document.querySelectorAll(".page5_4 .ach-hide");
   achievements.forEach((achi) => {

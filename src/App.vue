@@ -162,7 +162,7 @@ main {
 
   position: relative;
 
-  background-color: rgb(255, 4, 188);
+  background-color: white;
 
   overflow-x: clip;
   overflow-y: scroll;
