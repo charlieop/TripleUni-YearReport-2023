@@ -44,6 +44,12 @@
         :collage="collage"
         :userInfo="userInfo.data"
       />
+      <Page5_4
+        v-if="userInfo.data"
+        :collageInfo="collageInfo"
+        :collage="collage"
+        :userInfo="userInfo.data"
+      />
       <Page6
         v-if="userInfo.data"
         :collageInfo="collageInfo"
@@ -65,6 +71,8 @@ import Page4 from "@/components/Page4.vue";
 import Page5_1 from "@/components/Page5_1.vue";
 import Page5_2 from "@/components/Page5_2.vue";
 import Page5_3 from "@/components/Page5_3.vue";
+import Page5_4 from "@/components/Page5_4.vue";
+
 import Page6 from "@/components/Page6.vue";
 
 import { onMounted, ref, computed } from "vue";
