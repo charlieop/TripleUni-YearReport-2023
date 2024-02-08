@@ -16,7 +16,7 @@
         <div class="button button-2"></div>
       </div>
       <div class="user_agreement">
-        点击即代表您同意<a href="#">《隐私政策》</a>
+        点击即代表您同意<a href="https://terms.tripleuni.com/uni/privacy">《隐私政策》</a>
       </div>
     </div>
   </div>

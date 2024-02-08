@@ -16,10 +16,10 @@
               <!-- <img class="avatar" src="https://i.boatonland.com/avatar/party-12.svg"/> -->
               <p>{{ userInfoRef.user_serial }}</p>
             </div>
-            <div style="height: 1.74rem" v-else></div>
+            <div style="height: 1.76rem" v-else></div>
           </div>
 
-          <div style="display: flex; flex-direction: column;  padding: 2% 5% 0.7rem 15%;">
+          <div style="display: flex; flex-direction: column;  padding: 3% 5% 0.7rem 15%;">
             <p class="accent-text">{{ title1 }}</p>
 
             <p style="display: inline;  white-space: pre; line-height: 1.2rem; font-weight: 600; font-size: 75%;">{{ title2 }}</p>
@@ -51,7 +51,7 @@
 </template>
 
 <script setup>
-import { toRef, computed, onMounted, ref } from "vue";
+import { toRef, computed, onMounted, ref} from "vue";
 import { toPng } from 'html-to-image';
 
 const props = defineProps({
@@ -255,8 +255,8 @@ function next() {
   aspect-ratio: 4 / 7;
   align-self: flex-start;
   z-index: 2;
-  /* background-image: url("@/assets/imgs/instax-frame.svg"); */
-  background-image: url("https://i.boatonland.com/report2023/canvas2.png");
+  background-image: url("/imgs/page6-bg.jpg");
+  /* background-image: url("https://i.boatonland.com/report2023/canvas2.png"); */
   background-repeat: no-repeat;
   background-size: 100% 100%;
   padding: 41% 15% 36% 15%;
@@ -265,7 +265,7 @@ function next() {
   display: flex;
   flex-direction: column;
   position: relative;
-  border-radius: 20px;
+  border-radius: 10px;
   /* background-color: white; */
 }
 
@@ -326,7 +326,7 @@ function next() {
   /* color: linear-gradient(180deg, #00B9FF 10%, #D3F4FF 90%); */
   font-weight: 900;
   /* text-decoration: underline; */
-  font-size: 78%;
+  font-size: 79%;
   margin: 0.2rem 0;
 }
 

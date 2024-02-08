@@ -16,8 +16,8 @@
             class="post-icon"
             :src="
               postInfo.is_following
-                ? rootPath + 'imgs/icons/sf-star-fill.svg'
-                : rootPath + 'imgs/icons/sf-star.svg'
+                ? '/imgs/icons/sf-star-fill.svg'
+                : '/imgs/icons/sf-star.svg'
             "
             alt=""
           />
@@ -51,8 +51,8 @@
             class="post-icon"
             :src="
               postInfo.is_following
-                ? rootPath + 'imgs/icons/sf-star-fill.svg'
-                : rootPath + 'imgs/icons/sf-star.svg'
+                ? '/imgs/icons/sf-star-fill.svg'
+                : '/imgs/icons/sf-star.svg'
             "
             alt=""
           />
@@ -114,6 +114,7 @@ function hideDetail(e) {
   padding-inline: 1rem;
 }
 .post {
+  font-size: 0.8rem;
   color: #101010;
   height: 7.5rem;
   background-color: white;
